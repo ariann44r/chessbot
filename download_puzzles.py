@@ -2,7 +2,7 @@
 """Download Lichess puzzle DB and build a validated 2,000,000-puzzle pool (rating 1400-2500)."""
 import bz2, csv, io, json, os, sys, urllib.request
 
-URL = "https://database.lichess.org/puzzles/lichess_db_puzzle.csv.bz2"
+URL = "https://database.lichess.org/lichess_db_puzzle.csv.zst"
 TARGET = 2000000
 RATING_MIN, RATING_MAX = 1400, 2500
 OUT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "puzzles.jsonl")
@@ -18,7 +18,7 @@ def download(dest):
             chunk = r.read(1 << 20)
             if not chunk: break
             f.write(chunk); done += len(chunk)
-            log(f"\r  {done/1e6:.0f} MB", end="")
+            print(f"\r  {done/1e6:.0f} MB", end="", flush=True)
     log("\nDownload complete.")
 
 def validate(fen, moves_str):
@@ -36,12 +36,16 @@ def validate(fen, moves_str):
 
 def main():
     import chess  # fail fast if missing
-    zpath = os.path.join(os.path.dirname(OUT), "lichess_db_puzzle.csv.bz2")
+    zpath = os.path.join(os.path.dirname(OUT), "lichess_db_puzzle.csv.zst")
     if not os.path.exists(zpath): download(zpath)
     kept = 0
     seen = set()
-    with open(OUT, "w", encoding="utf-8") as out, bz2.open(zpath, "rt", encoding="utf-8") as z:
-        reader = csv.reader(io.TextIOWrapper(z, encoding="utf-8"))
+    import zstandard
+    dctx = zstandard.ZstdDecompressor()
+    with open(OUT, "w", encoding="utf-8") as out, \
+         open(zpath, "rb") as fh, dctx.stream_reader(fh) as zr, \
+         io.TextIOWrapper(zr, encoding="utf-8") as z:
+        reader = csv.reader(z)
         header = next(reader)
         idx = {n: i for i, n in enumerate(header)}
         for row in reader:
