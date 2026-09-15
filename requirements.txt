@@ -1,0 +1,6 @@
+pillow>=10.0
+imageio-ffmpeg>=0.4.9
+python-chess>=1.999
+requests>=2.31
+google-api-python-client>=2.100
+google-auth-oauthlib>=1.1

@@ -1,0 +1,54 @@
+name: ChessPuzzleBot
+
+on:
+  schedule:
+    # GitHub cron is UTC. Tehran = UTC+3:30 → 10 uploads/day at
+    # 00:30, 03:00, 05:30, 08:00, 10:30, 13:00, 15:30, 18:00, 20:30, 23:00 (Tehran)
+    - cron: "0 21 * * *"
+    - cron: "30 23 * * *"
+    - cron: "0 2 * * *"
+    - cron: "30 4 * * *"
+    - cron: "0 7 * * *"
+    - cron: "30 9 * * *"
+    - cron: "0 12 * * *"
+    - cron: "30 14 * * *"
+    - cron: "0 17 * * *"
+    - cron: "30 19 * * *"
+  workflow_dispatch: {}   # دکمه‌ی Run manually
+
+jobs:
+  upload:
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install system + python deps
+        run: |
+          sudo apt-get update -y
+          sudo apt-get install -y ffmpeg
+          pip install -r requirements.txt
+
+      - name: Restore YouTube login
+        run: |
+          echo "${{ secrets.TOKEN_PICKLE_B64 }}" | base64 -d > token.pickle
+          echo "${{ secrets.CLIENT_SECRETS_B64 }}" | base64 -d > client_secrets.json
+
+      - name: Restore puzzle pool (cache ~2M puzzles, downloaded once)
+        uses: actions/cache@v4
+        with:
+          path: puzzles.jsonl
+          key: puzzles-pool-2m-v1
+
+      - name: Download puzzle pool if not cached
+        run: |
+          if [ ! -s puzzles.jsonl ]; then
+            python download_puzzles.py
+          fi
+
+      - name: Build + upload 1 video (+5 shorts linked to it)
+        run: python bot.py --once
