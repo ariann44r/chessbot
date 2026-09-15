@@ -4,6 +4,20 @@ import os, math
 from PIL import Image, ImageDraw, ImageFont
 
 PIECE_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "assets", "pieces")
+def _font(candidates, size):
+    """Load a font cross-platform (Windows paths first, then Linux DejaVu)."""
+    for path in candidates:
+        try:
+            return ImageFont.truetype(path, size)
+        except OSError:
+            continue
+    return ImageFont.load_default()
+
+SERIF = ["C:/Windows/Fonts/georgia.ttf", "/usr/share/fonts/truetype/dejavu/DejaVuSerif.ttf",
+         "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf"]
+SANS_B = ["C:/Windows/Fonts/segoeuib.ttf", "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf"]
+SANS  = ["C:/Windows/Fonts/segoeui.ttf", "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf"]
+
 LIGHT = (240, 217, 181)   # lichess brown light  #f0d9b5
 DARK  = (181, 136, 99)    # lichess brown dark   #b58863
 HLMASK = (255, 213, 79, 96)
@@ -72,7 +86,7 @@ def render_board(fen, size=1440, title=None, top2=None, foot=None, foot2=None,
         img.alpha_composite(piece_img(p, S), (x, y))
     d = ImageDraw.Draw(img)
     fs = max(18, int(S*0.20))
-    fnt = ImageFont.truetype("C:/Windows/Fonts/georgia.ttf", fs)
+    fnt = _font(SERIF, fs)
     for i in range(8):
         x, y = ox + i*S, oy + 7*S
         d.text((x + S - fs*0.35, y + S - fs*0.35), chr(97+i), font=fnt,
@@ -81,15 +95,15 @@ def render_board(fen, size=1440, title=None, top2=None, foot=None, foot2=None,
         d.text((x + fs*0.35, y + fs*0.3), str(i+1), font=fnt,
                anchor="ls", fill=LIGHT if i % 2 == 0 else DARK)
     if title:
-        tf = ImageFont.truetype("C:/Windows/Fonts/segoeuib.ttf", int(size*0.085))
+        tf = _font(SANS_B, int(size*0.085))
         d.text((W//2, int(pad_top*0.10)), title, font=tf, anchor="ma", fill=(255,255,255))
     if top2:
-        tf2 = ImageFont.truetype("C:/Windows/Fonts/segoeui.ttf", int(size*0.052))
+        tf2 = _font(SANS, int(size*0.052))
         d.text((W//2, int(pad_top*0.52)), top2, font=tf2, anchor="ma", fill=(255, 196, 0))
     if foot:
-        ff = ImageFont.truetype("C:/Windows/Fonts/segoeuib.ttf", int(size*0.052))
+        ff = _font(SANS_B, int(size*0.052))
         d.text((W//2, H - int(pad_bot*0.66)), foot, font=ff, anchor="ms", fill=(255,255,255))
     if foot2:
-        ff2 = ImageFont.truetype("C:/Windows/Fonts/segoeui.ttf", int(size*0.042))
+        ff2 = _font(SANS, int(size*0.042))
         d.text((W//2, H - int(pad_bot*0.20)), foot2, font=ff2, anchor="ms", fill=(170, 170, 170))
     return img.convert("RGB")

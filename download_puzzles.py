@@ -5,6 +5,8 @@ import bz2, csv, io, json, os, sys, urllib.request
 URL = "https://database.lichess.org/lichess_db_puzzle.csv.zst"
 TARGET = 2000000
 RATING_MIN, RATING_MAX = 1400, 2500
+# فیلترهای کیفیت را کمی باز کردیم تا به ۲ میلیون پازل برسیم
+RD_MAX, POP_MIN = 150, 75
 OUT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "puzzles.jsonl")
 
 def log(*a): print(*a, flush=True)
@@ -52,7 +54,7 @@ def main():
             if kept >= TARGET: break
             rating = int(row[idx["Rating"]]); rd = int(row[idx["RatingDeviation"]])
             pop = int(row[idx["Popularity"]])
-            if not (RATING_MIN <= rating <= RATING_MAX and rd < 100 and pop >= 90):
+            if not (RATING_MIN <= rating <= RATING_MAX and rd < RD_MAX and pop >= POP_MIN):
                 continue
             pid, fen, moves = row[idx["PuzzleId"]], row[idx["FEN"]], row[idx["Moves"]]
             if pid in seen: continue
