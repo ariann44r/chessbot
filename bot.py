@@ -31,6 +31,17 @@ def online():
 
 USED_F = os.path.join(HERE, "used_puzzles.json")
 
+# ---- Gradual ramp-up (auto: no manual edits needed later) ----
+# Uploads/day per week since RAMP_START. Reaches 10 permanently after week 5.
+RAMP_START = "2026-09-16"
+RAMP_WEEKS = [1, 2, 3, 5, 8, 10]
+
+def allowed_today():
+    import datetime as dt
+    start = dt.date.fromisoformat(RAMP_START)
+    week = max(0, (dt.date.today() - start).days // 7)
+    return RAMP_WEEKS[min(week, len(RAMP_WEEKS) - 1)]
+
 def load_used():
     if os.path.exists(USED_F):
         return set(json.load(open(USED_F, encoding="utf-8")))
@@ -121,11 +132,19 @@ def run_one_batch(batch_no):
     return True
 
 def main():
-    if "--once" in sys.argv:   # DAZAI: one immediate batch, then exit
-        log("DAZAI mode: immediate upload of 1 video + 5 shorts")
+    if "--once" in sys.argv:   # scheduled/dispatch: one immediate batch, then exit
+        log("Run: immediate upload of 1 video + 5 shorts")
         if not online():
             log("No internet — cannot upload now."); return
         sync_with_youtube()
+        try:
+            import upload_youtube as uy
+            allowed = allowed_today(); done = uy.get_todays_upload_count(uy.get_service())
+            log(f"Ramp: today's limit = {allowed}/day, already uploaded today = {done}")
+            if done >= allowed:
+                log(f"SKIP: daily limit reached ({allowed}/day). Not uploading this run."); return
+        except Exception as e:
+            log("Ramp check failed (uploading anyway):", e)
         state = load_state()
         try:
             run_one_batch(state["uploaded_today"] + 1)
