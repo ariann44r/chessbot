@@ -132,29 +132,41 @@ def run_one_batch(batch_no):
     return True
 
 def main():
+    def quota_ok():
+        """Respect the weekly ramp even when state.json is wiped (CI runners).
+        Source of truth = what we already uploaded to YouTube today."""
+        import upload_youtube as uy
+        today = dt.date.today().isoformat()
+        state = load_state()
+        if state.get("last_run_date") != today:
+            state["last_run_date"] = today; state["uploaded_today"] = 0; save_state(state)
+        remote = uy.count_uploads_today()
+        state["uploaded_today"] = max(state.get("uploaded_today", 0), remote)
+        save_state(state)
+        quota = videos_today()
+        log(f"Weekly ramp: today's quota = {quota}; uploaded so far = {state['uploaded_today']}.")
+        return state, state["uploaded_today"] < quota
+
     if "--ci" in sys.argv:   # GitHub Actions: one batch if daily quota not reached
         if not online():
             log("No internet — skipping."); return
         sync_with_youtube()
-        state = load_state()
-        today = dt.date.today().isoformat()
-        if state.get("last_run_date") != today:
-            state["last_run_date"] = today; state["uploaded_today"] = 0; save_state(state)
-        quota = videos_today()
-        if state["uploaded_today"] >= quota:
-            log(f"Daily quota reached ({state['uploaded_today']}/{quota}). Nothing to do."); return
-        log(f"Weekly ramp: today's quota = {quota} videos.")
+        state, ok = quota_ok()
+        if not ok:
+            log("Daily quota reached. Nothing to do."); return
         try:
             run_one_batch(state["uploaded_today"] + 1)
         except Exception as e:
             log("ERROR:", e)
         return
-    if "--once" in sys.argv:   # DAZAI: one immediate batch, then exit
-        log("DAZAI mode: immediate upload of 1 video + 5 shorts")
+    if "--once" in sys.argv:   # DAZAI / CI: one immediate batch, respects daily ramp
+        log("DAZAI mode: immediate upload (if daily quota not reached; use --force to override)")
         if not online():
             log("No internet — cannot upload now."); return
         sync_with_youtube()
-        state = load_state()
+        state, ok = quota_ok()
+        if not ok and "--force" not in sys.argv:
+            log("Daily quota reached. Nothing to do."); return
         try:
             run_one_batch(state["uploaded_today"] + 1)
         except Exception as e:

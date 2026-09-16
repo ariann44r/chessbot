@@ -28,33 +28,31 @@ def get_uploaded_puzzle_ids(yt, max_pages=4):
     except Exception:
         pass
     return ids
+CLIENT_SECRETS = os.path.join(HERE, "client_secrets.json")
+TOKEN = os.path.join(HERE, "token.pickle")
 
-def get_todays_upload_count(yt, max_pages=4):
-    """Count our videos published today (UTC+3:30 / Tehran) via the uploads playlist."""
+def count_uploads_today():
+    """How many videos+shorts did WE upload today (Tehran time)? Survives state wipe
+    by asking YouTube directly — this is the reliable daily-quota check on CI."""
     import datetime as dt
-    count = 0
     try:
+        yt = get_service()
         ch = yt.channels().list(part="contentDetails", mine=True).execute()
         up = ch["items"][0]["contentDetails"]["relatedPlaylists"]["uploads"]
-        page = None
-        today_teh = dt.datetime.now(dt.timezone(dt.timedelta(hours=3, minutes=30))).date()
-        for _ in range(max_pages):
+        tz = dt.timezone(dt.timedelta(hours=3, minutes=30))
+        today = dt.datetime.now(tz).date().isoformat()
+        page, n = None, 0
+        for _ in range(5):
             pl = yt.playlistItems().list(part="contentDetails", playlistId=up,
                                          maxResults=50, pageToken=page).execute()
             for it in pl.get("items", []):
-                pub = it["contentDetails"].get("videoPublishedAt", "")
-                if not pub: continue
-                d = dt.datetime.fromisoformat(pub.replace("Z", "+00:00"))
-                if d.astimezone(dt.timezone(dt.timedelta(hours=3, minutes=30))).date() == today_teh:
-                    count += 1
+                pub = it.get("contentDetails", {}).get("videoPublishedAt", "")
+                if pub[:10] == today: n += 1
             page = pl.get("nextPageToken")
             if not page: break
+        return n
     except Exception:
-        pass
-    return count
-
-CLIENT_SECRETS = os.path.join(HERE, "client_secrets.json")
-TOKEN = os.path.join(HERE, "token.pickle")
+        return 0
 
 def get_service():
     from google.auth.transport.requests import Request
