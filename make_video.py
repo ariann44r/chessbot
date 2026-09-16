@@ -30,7 +30,7 @@ def make_music(path, seconds=75, sr=44100, rng=None):
     rng = rng or random.Random()
     key_shift = rng.choice([-5,-3,-2,0,2,3,5,7])
     chords = [[n + key_shift for n in ch] for ch in rng.choice(PROGRESSIONS)]
-    beat = rng.choice([0.55, 0.62, 0.7])          # calm tempo
+    beat = rng.choice([0.65, 0.72, 0.8])          # calm tempo (slower = cozier)
     steps_per_chord = 8
     total = int(seconds * sr)
     samples = [0.0] * total
@@ -51,6 +51,19 @@ def make_music(path, seconds=75, sr=44100, rng=None):
                 vib = 1 + vib_amt*math.sin(2*math.pi*vib_hz*t)
                 samples[t0 + j] += 0.045 * env * (
                     math.sin(2*math.pi*fr*vib*t) + 0.3*math.sin(2*math.pi*2.001*fr*t))
+        t0 += seg_len; ci += 1
+
+    # --- bass: warm soft root note under each chord (makes it feel fuller & cozier)
+    t0, ci = 0, 0
+    while t0 < total:
+        chord = chords[ci % len(chords)]
+        seg_len = int(steps_per_chord*beat*sr)
+        fr = f(chord[0] - 24)   # root, two octaves down
+        for j in range(min(seg_len, total - t0)):
+            t = j / sr
+            env = min(1, t/0.8) * min(1, (seg_len/sr - t)/1.2)
+            samples[t0 + j] += 0.05 * env * (
+                math.sin(2*math.pi*fr*t) + 0.4*math.sin(2*math.pi*2*fr*t))
         t0 += seg_len; ci += 1
 
     # --- piano: gentle melody notes (decaying harmonics), one per beat
