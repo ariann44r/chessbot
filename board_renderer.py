@@ -107,10 +107,15 @@ def render_board(fen, size=1440, title=None, top2=None, foot=None, foot2=None,
         tw = od.textlength(text, font=fnt)
         bx0 = W//2 - tw/2 - fh*0.45; bx1 = W//2 + tw/2 + fh*0.45
         by0 = cy - fh*0.75; by1 = cy + fh*0.75
+        # clamp: band must be fully inside the image
+        if by0 < 4:
+            by1 = min(H - 4, by1 + (4 - by0)); by0 = 4
+        if by1 > H - 4:
+            by0 = max(4, by0 - (by1 - (H - 4))); by1 = H - 4
         od.rounded_rectangle([bx0, by0, bx1, by1], radius=int(fh*0.35), fill=(12, 12, 16, 225))
         d.text((W//2, cy), text, font=fnt, anchor="mm", fill=(255,255,255))
     if title:
-        band(title, int(pad_top*0.30), int(size*0.115), SANS_B)
+        band(title, int(pad_top*0.32), int(size*0.080), SANS_B)
     if top2:
         fh2 = int(size*0.062)
         tf2 = _font(SANS, fh2)
