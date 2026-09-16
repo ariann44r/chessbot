@@ -1,18 +1,16 @@
 # -*- coding: utf-8 -*-
-"""Download Lichess puzzle DB and build a validated 2,000,000-puzzle pool (rating 1400-2500)."""
+"""Download Lichess puzzle DB and build a validated 3,000,000-puzzle pool (rating 1400-2500)."""
 import bz2, csv, io, json, os, sys, urllib.request
 
-URL = "https://database.lichess.org/lichess_db_puzzle.csv.zst"
-TARGET = 2000000
+URL = "https://database.lichess.org/puzzles/lichess_db_puzzle.csv.bz2"
+TARGET = 3000000
 RATING_MIN, RATING_MAX = 1400, 2500
-# فیلترهای کیفیت را کمی باز کردیم تا به ۲ میلیون پازل برسیم
-RD_MAX, POP_MIN = 150, 75
 OUT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "puzzles.jsonl")
 
 def log(*a): print(*a, flush=True)
 
 def download(dest):
-    log("Downloading Lichess puzzle database (~700 MB, official & free)...")
+    log("Downloading Lichess puzzle database (~350 MB, official & free)...")
     req = urllib.request.Request(URL, headers={"User-Agent": "ChessPuzzleBot/1.0"})
     done = 0
     with urllib.request.urlopen(req, timeout=60) as r, open(dest, "wb") as f:
@@ -20,7 +18,7 @@ def download(dest):
             chunk = r.read(1 << 20)
             if not chunk: break
             f.write(chunk); done += len(chunk)
-            print(f"\r  {done/1e6:.0f} MB", end="", flush=True)
+            log(f"\r  {done/1e6:.0f} MB", end="")
     log("\nDownload complete.")
 
 def validate(fen, moves_str):
@@ -38,23 +36,19 @@ def validate(fen, moves_str):
 
 def main():
     import chess  # fail fast if missing
-    zpath = os.path.join(os.path.dirname(OUT), "lichess_db_puzzle.csv.zst")
+    zpath = os.path.join(os.path.dirname(OUT), "lichess_db_puzzle.csv.bz2")
     if not os.path.exists(zpath): download(zpath)
     kept = 0
     seen = set()
-    import zstandard
-    dctx = zstandard.ZstdDecompressor()
-    with open(OUT, "w", encoding="utf-8") as out, \
-         open(zpath, "rb") as fh, dctx.stream_reader(fh) as zr, \
-         io.TextIOWrapper(zr, encoding="utf-8") as z:
-        reader = csv.reader(z)
+    with open(OUT, "w", encoding="utf-8") as out, bz2.open(zpath, "rt", encoding="utf-8") as z:
+        reader = csv.reader(io.TextIOWrapper(z, encoding="utf-8"))
         header = next(reader)
         idx = {n: i for i, n in enumerate(header)}
         for row in reader:
             if kept >= TARGET: break
             rating = int(row[idx["Rating"]]); rd = int(row[idx["RatingDeviation"]])
             pop = int(row[idx["Popularity"]])
-            if not (RATING_MIN <= rating <= RATING_MAX and rd < RD_MAX and pop >= POP_MIN):
+            if not (RATING_MIN <= rating <= RATING_MAX and rd < 100 and pop >= 90):
                 continue
             pid, fen, moves = row[idx["PuzzleId"]], row[idx["FEN"]], row[idx["Moves"]]
             if pid in seen: continue
