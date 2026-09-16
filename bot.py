@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""Main bot: builds & uploads 10 videos/day (+5 shorts per video, each linked to its full video) until stopped.
+"""Main bot: builds & uploads 5 videos/day (+5 shorts per video) until stopped.
 Runs forever; checks internet before every upload; prints DONE when a batch finishes."""
 import json, os, socket, subprocess, sys, time, datetime as dt
 
@@ -30,17 +30,6 @@ def online():
     return False
 
 USED_F = os.path.join(HERE, "used_puzzles.json")
-
-# ---- Gradual ramp-up (auto: no manual edits needed later) ----
-# Uploads/day per week since RAMP_START. Reaches 10 permanently after week 5.
-RAMP_START = "2026-09-16"
-RAMP_WEEKS = [1, 2, 3, 5, 8, 10]
-
-def allowed_today():
-    import datetime as dt
-    start = dt.date.fromisoformat(RAMP_START)
-    week = max(0, (dt.date.today() - start).days // 7)
-    return RAMP_WEEKS[min(week, len(RAMP_WEEKS) - 1)]
 
 def load_used():
     if os.path.exists(USED_F):
@@ -77,26 +66,39 @@ def next_puzzles(state, n=5):
             yield pz
 
 def schedule_times():
-    """5 upload slots/day (local time), best-practice spread."""
+    """Upload slots/day (local time), best-practice spread."""
     return CFG.get("upload_times", ["09:00", "12:00", "15:00", "18:00", "21:00"])
+
+def videos_today():
+    """Weekly ramp: week 1 -> 2/day, week 2 -> 4, week 3 -> 8, week 4+ -> 10."""
+    ramp = CFG.get("ramp_per_week", [2, 4, 8, 10])
+    start = dt.date.fromisoformat(CFG.get("start_date", dt.date.today().isoformat()))
+    week = ((dt.date.today() - start).days // 7) + 1
+    return ramp[min(max(week, 1), len(ramp)) - 1]
+
+def n_puzzles():
+    """Puzzles per video (8 x 15s = 2 minutes)."""
+    return int(CFG.get("puzzles_per_video", 5))
 
 def run_one_batch(batch_no):
     state = load_state()
     ff = mv.get_ffmpeg()
-    puzzles = list(next_puzzles(state, 5))
-    if len(puzzles) < 5:
+    N = n_puzzles()
+    puzzles = list(next_puzzles(state, N))
+    if len(puzzles) < N:
         log("Puzzle pool exhausted! Run download_puzzles.py again."); return False
     tag = time.strftime("%Y%m%d_%H%M%S")
-    log(f"Building video {batch_no} (5 puzzles, 2 min each)...")
-    video = mv.make_video(puzzles, os.path.join(HERE, "out"), tag, seg=120, ff=ff)
+    seg = int(CFG.get("seconds_per_puzzle", 120))
+    log(f"Building video {batch_no} ({len(puzzles)} puzzles, {seg}s each)...")
+    video = mv.make_video(puzzles, os.path.join(HERE, "out"), tag, seg=seg, ff=ff)
     log("Video ready:", os.path.basename(video))
     log("Waiting for internet (if offline, retries every 60s)...")
     while not online(): time.sleep(60)
     log("Online. Uploading...")
     import upload_youtube as uy
     r0 = puzzles[0]["rating"]; r4 = puzzles[-1]["rating"]
-    title = f"5 Chess Puzzles (Rating {r0}-{r4}) 🧠 Can You Solve Them All?"
-    desc = ("Five hand-picked chess puzzles. The answer of each puzzle is in the "
+    title = f"{len(puzzles)} Chess Puzzles (Rating {r0}-{r4}) 🧠 Can You Solve Them All?"
+    desc = (f"{len(puzzles)} hand-picked chess puzzles. The answer of each puzzle is in the "
             "pinned comment. Comment your solution before checking!\n"
             "Subscribe & Follow for daily puzzles ♟️\n\n#chess #puzzle #chesspuzzle")
     vid = uy.upload(video, title, desc + f"\nPuzzles: {','.join(p['id'] for p in puzzles)}",
@@ -106,45 +108,52 @@ def run_one_batch(batch_no):
         s = mv.make_short(pz, os.path.join(HERE, "out"), tag, i, ff=ff)
         while not online(): time.sleep(60)
         uy.upload(s, f"Chess Puzzle #{i} (Rating {pz['rating']}) ♟️ #shorts",
-                  f"Answer in the comments! Rating {pz['rating']}.\n"
-                  f"▶️ Full video with all 5 puzzles: https://youtu.be/{vid}\n"
+                  f"Answer in the comments. Rating {pz['rating']}.\n"
                   f"Themes: {pz.get('themes','')}\n"
-                  f"Subscribe for daily chess puzzles ♟\n"
-                  f"#chess #shorts #puzzle #chesspuzzle #chessshorts #tactics",
+                  f"▶️ Full puzzle video: https://youtu.be/{vid}\n#chess #shorts #puzzle",
                   ["chess", "chessshorts", "puzzle", "chesspuzzle", "shorts"],
                   is_short=True)
         os.remove(s)
-        log(f"  Short {i}/5 uploaded.")
+        log(f"  Short {i}/{len(puzzles)} uploaded.")
     os.remove(video)
-    state["next"] += 5
+    state["next"] += len(puzzles)
     state["uploaded_today"] += 1
     save_state(state)
     used = load_used() | {p["id"] for p in puzzles}
     save_used(used)   # local anti-duplicate memory
-    log("BATCH DONE ✅ (1 video + 5 shorts).")
+    log(f"BATCH DONE ✅ (1 video + {len(puzzles)} shorts).")
     try:
         import ctypes
         ctypes.windll.user32.MessageBoxW(
-            0, "✅ آپلود کامل شد!\n\n1 ویدیو + 5 شورت منتشر شد.",
+            0, "✅ آپلود کامل شد!\n\n1 ویدیو + شورت‌ها منتشر شد.",
             "ChessPuzzleBot", 0x40)
     except Exception:
         pass
     return True
 
 def main():
-    if "--once" in sys.argv:   # scheduled/dispatch: one immediate batch, then exit
-        log("Run: immediate upload of 1 video + 5 shorts")
+    if "--ci" in sys.argv:   # GitHub Actions: one batch if daily quota not reached
+        if not online():
+            log("No internet — skipping."); return
+        sync_with_youtube()
+        state = load_state()
+        today = dt.date.today().isoformat()
+        if state.get("last_run_date") != today:
+            state["last_run_date"] = today; state["uploaded_today"] = 0; save_state(state)
+        quota = videos_today()
+        if state["uploaded_today"] >= quota:
+            log(f"Daily quota reached ({state['uploaded_today']}/{quota}). Nothing to do."); return
+        log(f"Weekly ramp: today's quota = {quota} videos.")
+        try:
+            run_one_batch(state["uploaded_today"] + 1)
+        except Exception as e:
+            log("ERROR:", e)
+        return
+    if "--once" in sys.argv:   # DAZAI: one immediate batch, then exit
+        log("DAZAI mode: immediate upload of 1 video + 5 shorts")
         if not online():
             log("No internet — cannot upload now."); return
         sync_with_youtube()
-        try:
-            import upload_youtube as uy
-            allowed = allowed_today(); done = uy.get_todays_upload_count(uy.get_service())
-            log(f"Ramp: today's limit = {allowed}/day, already uploaded today = {done}")
-            if done >= allowed:
-                log(f"SKIP: daily limit reached ({allowed}/day). Not uploading this run."); return
-        except Exception as e:
-            log("Ramp check failed (uploading anyway):", e)
         state = load_state()
         try:
             run_one_batch(state["uploaded_today"] + 1)
