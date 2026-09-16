@@ -91,10 +91,10 @@ def turn_text(fen):
 
 def board_frame(pz, i, out_dir, tag, w, h, suffix="q"):
     q = os.path.join(out_dir, f"{tag}_{suffix}{i}.png")
-    render_board(pz["fen"], title=f"Puzzle #{i}  •  Rating {pz['rating']}",
+    render_board(pz["fen"], title=f"Puzzle #{i} — Rating {pz['rating']}",
                  top2=f"{turn_text(pz['fen'])} — Find the best move!",
-                 foot="Answer in the comments  👇",
-                 foot2="Subscribe & Follow — don't forget!").save(q)
+                 foot="Answer in the comments below",
+                 foot2="Subscribe & Follow - do not forget!").save(q)
     frame = os.path.join(out_dir, f"{tag}_{suffix}{i}_f.png")
     to_bg(q, w, h).save(frame); os.remove(q)
     return frame

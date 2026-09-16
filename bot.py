@@ -87,8 +87,8 @@ def run_one_batch(batch_no):
     if len(puzzles) < 5:
         log("Puzzle pool exhausted! Run download_puzzles.py again."); return False
     tag = time.strftime("%Y%m%d_%H%M%S")
-    log(f"Building video {batch_no} (5 puzzles, 15s each)...")
-    video = mv.make_video(puzzles, os.path.join(HERE, "out"), tag, seg=15, ff=ff)
+    log(f"Building video {batch_no} (5 puzzles, 2 min each)...")
+    video = mv.make_video(puzzles, os.path.join(HERE, "out"), tag, seg=120, ff=ff)
     log("Video ready:", os.path.basename(video))
     log("Waiting for internet (if offline, retries every 60s)...")
     while not online(): time.sleep(60)
