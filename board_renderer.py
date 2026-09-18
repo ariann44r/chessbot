@@ -119,16 +119,30 @@ def render_9x16(fen, puzzle_num, W=1080, H=1920, rating=None):
 
 # ------------------------------------------------------------------ thumbnail
 THUMB_STYLES = [
-    # (hook lines, accent color, gradient background) — هر بار متفاوت
+    # (hook lines, accent color, gradient background) — ۲۰ استایل، پشت سر هم و بعد ریست
     (["99% FAIL",   "THIS PUZZLE!"], (255, 209, 66),  [(18, 18, 24), (46, 26, 10)]),
     (["IMPOSSIBLE?", "TRY IT!"],     (255, 84, 84),   [(26, 10, 10), (10, 18, 26)]),
     (["ONLY 1%",    "CAN SOLVE!"],   (66, 255, 170),  [(8, 22, 16), (16, 30, 40)]),
     (["CAN YOU",    "SURVIVE?"],     (120, 180, 255), [(10, 10, 28), (24, 10, 40)]),
     (["BEWARE:",    "ONLY 1 MOVE!"],  (255, 140, 60),  [(30, 16, 6), (40, 30, 10)]),
     (["GENIUS",     "TEST ♟"],       (212, 175, 55),  [(14, 14, 18), (44, 34, 12)]),
+    (["NOBODY",     "SOLVED IT!"],    (255, 60, 120),  [(28, 6, 18), (8, 12, 34)]),
+    (["CHECKMATE",  "IN 2?"],        (255, 230, 120), [(34, 28, 8), (60, 40, 6)]),
+    (["QUEEN",      "SACRIFICE!"],    (255, 120, 200), [(20, 8, 30), (40, 6, 34)]),
+    (["THINK",      "LIKE A GM"],    (100, 220, 255), [(4, 22, 30), (8, 36, 44)]),
+    (["5 MOVES",    "TO WIN"],       (180, 255, 100), [(10, 26, 6), (24, 40, 8)]),
+    (["HARDER",     "THAN IT LOOKS"],(255, 170, 60),  [(34, 20, 4), (44, 24, 8)]),
+    (["BLUNDER",    "OR BRILLIANT?"],(255, 90, 90),   [(30, 8, 8), (14, 20, 26)]),
+    (["ONE WRONG", "MOVE = LOSS"],  (255, 200, 40),  [(26, 22, 4), (34, 28, 10)]),
+    (["MATES",      "EVERYWHERE!"],   (240, 240, 255), [(12, 12, 30), (22, 8, 40)]),
+    (["PRO",        "LEVEL ONLY"],    (60, 255, 210),  [(6, 26, 22), (8, 34, 40)]),
+    (["YOU HAVE",  "2 MINUTES"],     (255, 110, 180), [(30, 6, 24), (10, 18, 36)]),
+    (["SECRET",    "ATTACK!"],       (255, 240, 90),  [(36, 30, 2), (44, 34, 12)]),
+    (["FORK",      "ATTACK!"],        (140, 255, 130), [(6, 24, 10), (16, 40, 16)]),
+    (["THE HARDEST", "OF TODAY"],    (255, 70, 150),  [(24, 8, 20), (36, 10, 30)]),
 ]
 
-def render_thumbnail(fen, puzzle_num, rating=None, W=1280, H=720, variant=0):
+def render_thumbnail(fen, puzzle_num, rating=None, W=1280, H=720, variant=0, part=0):
     """Attractive, always-different chess thumbnail (style varies per upload)."""
     hook, accent, grad = THUMB_STYLES[variant % len(THUMB_STYLES)]
     img = Image.new("RGB", (W, H), grad[0])
@@ -146,7 +160,8 @@ def render_thumbnail(fen, puzzle_num, rating=None, W=1280, H=720, variant=0):
     _text(img, hook[0], _font("segoeuib", int(H*0.085)), tx, int(H*0.38), (245, 243, 235))
     _text(img, hook[1], _font("segoeuib", int(H*0.085)), tx, int(H*0.52), (245, 243, 235))
     _text(img, (f"RATING {rating}" if rating else "DAILY PUZZLE"), _font("segoeuib", int(H*0.058)), tx, int(H*0.70), accent)
-    _text(img, "ANSWER PINNED 💬", _font("segoeuib", int(H*0.045)), tx, int(H*0.82), (160, 160, 150))
+    _text(img, f"PART {part}", _font("segoeuib", int(H*0.052)), tx, int(H*0.80), accent)
+    _text(img, "ANSWER PINNED 💬", _font("segoeuib", int(H*0.04)), tx, int(H*0.88), (160, 160, 150))
     return img
 
 # Backwards-compatible alias (old callers)

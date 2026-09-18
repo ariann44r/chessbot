@@ -195,7 +195,8 @@ def run_one_batch(batch_no):
     total_min = seg*len(puzzles)/60
     log(f"Building video {batch_no}: {len(puzzles)} puzzles x {seg/60:.0f} min = {total_min:.0f} min ...")
     video = mv.make_video(puzzles, os.path.join(HERE, "out"), tag, seg=seg, ff=ff, start_num=n0)
-    thumb = mv.make_thumbnail(puzzles, os.path.join(HERE, "out"), tag, n0)
+    part = state["next"] // len(puzzles) + 1          # پارت = تعداد ویدیوهای قبلی + 1 (هر آپلود +1)
+    thumb = mv.make_thumbnail(puzzles, os.path.join(HERE, "out"), tag, n0, part)
     log("Video ready:", os.path.basename(video))
     log("Waiting for internet (if offline, retries every 60s)...")
     while not online(): time.sleep(60)

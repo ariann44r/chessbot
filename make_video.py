@@ -172,14 +172,15 @@ def make_short(pz, puzzle_num, out_dir, tag, i, ff=None, seg=25):
     os.remove(frame); os.remove(music)
     return final
 
-def make_thumbnail(puzzles, out_dir, tag, puzzle_num):
+def make_thumbnail(puzzles, out_dir, tag, puzzle_num, part=1):
     """Attractive chess thumbnail for the main video."""
     os.makedirs(out_dir, exist_ok=True)
     rng = random.Random(f"{tag}thumb")
     pz = rng.choice(puzzles)                 # a random puzzle of this batch as cover
     path = os.path.join(out_dir, f"{tag}_thumb.png")
-    # هر بار استایل/رنگ/متن تامنیل متفاوت
-    br.render_thumbnail(pz["fen"], puzzle_num, rating=pz.get("rating"), variant=rng.randrange(6)).save(path)
+    # استایل‌ها به ترتیب 1..20 و بعد ریست (پارت هر ویدیو یکی جلو می‌ره)
+    variant = (part - 1) % 20
+    br.render_thumbnail(pz["fen"], puzzle_num, rating=pz.get("rating"), variant=variant, part=part).save(path)
     return path
 
 if __name__ == "__main__":
