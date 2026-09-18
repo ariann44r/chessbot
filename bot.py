@@ -23,7 +23,7 @@ PUZZLES_PER_VIDEO = CFG.get("puzzles_per_video", 5)
 SECONDS_PER_PUZZLE = CFG.get("seconds_per_puzzle", 120)   # 2 minutes
 SHORT_SECONDS = CFG.get("short_seconds", 25)
 LAUNCH_DATE = dt.date.fromisoformat(CFG.get("launch_date", dt.date.today().isoformat()))
-WEEKLY_QUOTA = CFG.get("weekly_videos_per_day", {"1": 2, "2": 5, "3": 8, "default": 8})
+WEEKLY_QUOTA = CFG.get("weekly_videos_per_day", {"1": 2, "2": 2, "3": 8, "default": 8})  # تا هفته ۳: روزی ۲ ویدیو؛ هفته ۳+: ۸
 SHORTS_RAMP = CFG.get("shorts_per_video_ramp", {"1": 2, "2": 2, "3": 1, "default": 1})
 
 import glob
@@ -88,6 +88,7 @@ def next_puzzles(state, n=PUZZLES_PER_VIDEO):
     """Pick the next UNUSED puzzles across the WHOLE pool
     (puzzles.jsonl + puzzles_*.jsonl chunks). Skips any already uploaded."""
     used = load_used()
+    batch_seen = set()   # ضد تکرار داخل خود ویدیو
     picked = 0
     for path in POOL_FILES:
         if picked >= n: break
@@ -95,7 +96,8 @@ def next_puzzles(state, n=PUZZLES_PER_VIDEO):
             for line in f:
                 if picked >= n: break
                 pz = json.loads(line)
-                if pz["id"] in used: continue
+                if pz["id"] in used or pz["id"] in batch_seen: continue  # هرگز تکراری
+                batch_seen.add(pz["id"])
                 picked += 1
                 yield pz
 
