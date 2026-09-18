@@ -1,13 +1,32 @@
 # -*- coding: utf-8 -*-
-"""Lichess-exact board renderer (official cburnett pieces, brown theme)."""
-import os, math
+"""Board renderer — lichess-exact (official cburnett pieces, brown theme).
+
+Layouts (approved by the user):
+- 16:9 long video: board fills the ENTIRE LEFT side edge-to-edge,
+  texts on the RIGHT: "Puzzle #N" -> "White/Black to move" -> "Comment the answer!"
+- 9:16 Short: full-width board centered, same texts above and below.
+The solution is NEVER drawn on the board.
+"""
+import os
 from PIL import Image, ImageDraw, ImageFont
 
 PIECE_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "assets", "pieces")
 LIGHT = (240, 217, 181)   # lichess brown light  #f0d9b5
 DARK  = (181, 136, 99)    # lichess brown dark   #b58863
-HLMASK = (255, 213, 79, 96)
-ARROW  = (155, 199, 0, 128)
+BG    = (22, 21, 18)      # near-black background
+GOLD  = (240, 201, 135)
+GREY  = (185, 182, 165)
+GREEN = (157, 168, 143)
+
+def _font(name, size):
+    paths = (f"C:/Windows/Fonts/{name}.ttf", "C:/Windows/Fonts/arialbd.ttf", "C:/Windows/Fonts/arial.ttf",
+             "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf",   # GitHub Linux runner
+             "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf")
+    for p in paths:
+        if os.path.exists(p):
+            try: return ImageFont.truetype(p, size)
+            except Exception: pass
+    return ImageFont.load_default()
 
 def parse_fen(fen):
     board = {}
@@ -23,83 +42,101 @@ def piece_img(p, S):
     im = Image.open(os.path.join(PIECE_DIR, ("w" if p.isupper() else "b") + p.upper() + ".png")).convert("RGBA")
     return im.resize((S, S), Image.LANCZOS)
 
-def sq_xy(sq, S, ox, oy):
-    f = ord(sq[0]) - 97; r = int(sq[1]) - 1
-    return ox + f*S, oy + (7-r)*S
+def turn_text(fen):
+    """The SOLVER's turn — the side that plays the winning solution.
+    Lichess DB format: the FEN side-to-move plays moves[0], which is the
+    opponent's (losing) setup move. The puzzle is solved by the OTHER side.
+    So the solver is always the OPPOSITE of the FEN side to move.
+    (Example: FEN '... b' + Kxf7 ... means WHITE mates in 2 -> 'White to move'.)"""
+    solver = "w" if fen.split()[1] == "b" else "b"
+    return "White to move" if solver == "w" else "Black to move"
 
-def draw_arrow(layer, a, b, S, ox, oy):
-    d = ImageDraw.Draw(layer)
-    x1,y1 = sq_xy(a,S,ox,oy); x2,y2 = sq_xy(b,S,ox,oy)
-    cx, cy = x1+S/2, y1+S/2; dx, dy = x2+S/2, y2+S/2
-    ang = math.atan2(dy-cy, dx-cx)
-    w = S*0.22
-    sx, sy = cx + S*0.18*math.cos(ang), cy + S*0.18*math.sin(ang)
-    ex, ey = dx - w*0.75*math.cos(ang), dy - w*0.75*math.sin(ang)
-    d.line([sx,sy,ex,ey], fill=ARROW, width=int(w))
-    hw = w*1.4
-    for s in (-1, 1):
-        d.polygon([(ex,ey),
-                   (ex + hw*math.cos(ang + s*0.42), ey + hw*math.sin(ang + s*0.42)),
-                   (ex + hw*0.4*math.cos(ang), ey + hw*0.4*math.sin(ang))], fill=ARROW)
-
-def render_board(fen, size=1440, title=None, top2=None, foot=None, foot2=None,
-                 last=None, sol=None):
-    S = size // 8
-    pad_top = int(size*0.22) if title else int(size*0.06)
-    pad_bot = int(size*0.22) if foot else int(size*0.06)
-    pad = int(size*0.05)
-    W = size + 2*pad
-    H = size + pad_top + pad_bot
-    oy = pad_top; ox = pad
-    img = Image.new("RGBA", (W, H), (36, 37, 38, 255))
-    board = parse_fen(fen)
+def _draw_board(img, fen, bx, by, S, with_coords=True):
+    d = ImageDraw.Draw(img)
     for r in range(8):
         for c in range(8):
-            x, y = ox + c*S, oy + (7-r)*S
-            img.paste(Image.new("RGBA",(S,S), LIGHT if (c+r)%2==0 else DARK), (x,y))
-    if last:
-        hl = Image.new("RGBA", (W, H), (0,0,0,0)); hd = ImageDraw.Draw(hl)
-        for sq in last:
-            x, y = sq_xy(sq, S, ox, oy)
-            hd.rectangle([x, y, x+S, y+S], fill=HLMASK)
-        img = Image.alpha_composite(img, hl)
-    if sol and len(sol) == 2:
-        al = Image.new("RGBA", (W, H), (0,0,0,0))
-        draw_arrow(al, sol[0], sol[1], S, ox, oy)
-        img = Image.alpha_composite(img, al)
-    for (c, r), p in board.items():
-        x, y = ox + c*S, oy + (7-r)*S
-        img.alpha_composite(piece_img(p, S), (x, y))
-    d = ImageDraw.Draw(img)
-    fs = max(18, int(S*0.20))
-    fnt = ImageFont.truetype("C:/Windows/Fonts/georgia.ttf", fs)
-    for i in range(8):
-        x, y = ox + i*S, oy + 7*S
-        d.text((x + S - fs*0.35, y + S - fs*0.35), chr(97+i), font=fnt,
-               anchor="rs", fill=LIGHT if i % 2 == 1 else DARK)
-        x, y = ox, oy + (7-i)*S
-        d.text((x + fs*0.35, y + fs*0.3), str(i+1), font=fnt,
-               anchor="ls", fill=LIGHT if i % 2 == 0 else DARK)
-    def fit_font(path, px, text, max_w):
-        """Shrink the font until the text fits inside the frame (never clipped)."""
-        while px > 12:
-            f = ImageFont.truetype(path, px)
-            if d.textlength(text, font=f) <= max_w:
-                return f
-            px = int(px * 0.92)
-        return ImageFont.truetype(path, max(12, px))
+            d.rectangle([bx+c*S, by+(7-r)*S, bx+(c+1)*S-1, by+(8-r)*S-1],
+                        fill=LIGHT if (c+r) % 2 == 0 else DARK)
+    for (c, r), p in parse_fen(fen).items():
+        img.paste(piece_img(p, int(S*0.95)), (int(bx+c*S + S*0.025), int(by+(7-r)*S + S*0.025)),
+                  piece_img(p, int(S*0.95)))
+    if with_coords:  # small lichess-style coordinates in corner squares
+        f = _font("georgiab", max(14, int(S*0.16)))
+        for i in range(8):
+            x, y = bx+i*S, by+7*S
+            d.text((x+S-4, y+S-4), chr(97+i), font=f, anchor="rs",
+                   fill=LIGHT if (i+7) % 2 == 0 else DARK)
+            d.text((bx+4, by+(7-i)*S+4), str(i+1), font=f,
+                   fill=LIGHT if (i+0) % 2 == 0 else DARK)
 
-    max_w = W - 2*int(size*0.03)   # keep a small margin from the frame edges
-    if title:
-        tf = fit_font("C:/Windows/Fonts/segoeuib.ttf", int(size*0.062), title, max_w)
-        d.text((W//2, int(pad_top*0.14)), title, font=tf, anchor="ma", fill=(255,255,255))
-    if top2:
-        tf2 = fit_font("C:/Windows/Fonts/segoeui.ttf", int(size*0.044), top2, max_w)
-        d.text((W//2, int(pad_top*0.55)), top2, font=tf2, anchor="ma", fill=(255, 196, 0))
-    if foot:
-        ff = fit_font("C:/Windows/Fonts/segoeuib.ttf", int(size*0.046), foot, max_w)
-        d.text((W//2, H - int(pad_bot*0.66)), foot, font=ff, anchor="ms", fill=(255,255,255))
-    if foot2:
-        ff2 = fit_font("C:/Windows/Fonts/segoeui.ttf", int(size*0.038), foot2, max_w)
-        d.text((W//2, H - int(pad_bot*0.20)), foot2, font=ff2, anchor="ms", fill=(170, 170, 170))
-    return img.convert("RGB")
+def _text(img, msg, f, x, y, col, alpha=255):
+    if alpha <= 0: return
+    lay = Image.new("RGBA", img.size, (0, 0, 0, 0))
+    ImageDraw.Draw(lay).text((x, y), msg, font=f, fill=tuple(col)+(alpha,), anchor="ma")
+    img.paste(Image.alpha_composite(img.convert("RGBA"), lay).convert("RGB"), (0, 0))
+
+# ------------------------------------------------------------------ 16:9
+def render_16x9(fen, puzzle_num, W=1920, H=1080, rating=None):
+    """Board = full LEFT half (edge-to-edge). Texts on the right side."""
+    img = Image.new("RGB", (W, H), BG)
+    S = H // 8
+    bx, by = 0, 0
+    _draw_board(img, fen, bx, by, S)
+    tx = (W + 8*S) // 2                      # center of the right area
+    f1 = _font("segoeuib", int(H*0.085))      # Puzzle #N
+    f2 = _font("segoeuib", int(H*0.052))      # turn
+    f3 = _font("segoeui",  int(H*0.045))      # comment
+    f4 = _font("segoeui",  int(H*0.036))      # rating
+    y = int(H*0.16)
+    _text(img, f"Puzzle #{puzzle_num}", f1, tx, y, GOLD)
+    y += int(f1.size*1.6)
+    if rating:
+        _text(img, f"Rating: {rating}", f4, tx, y, GREY); y += int(f4.size*1.9)
+    _text(img, turn_text(fen), f2, tx, y, (236, 234, 217)); y += int(f2.size*3.4)
+    _text(img, "Comment the answer!", f3, tx, y, GREEN)
+    return img
+
+# ------------------------------------------------------------------ 9:16
+def render_9x16(fen, puzzle_num, W=1080, H=1920, rating=None):
+    """Short: full-width board, texts above and below (approved layout)."""
+    img = Image.new("RGB", (W, H), BG)
+    S = W // 8
+    bx, by = 0, int(H*0.30)
+    _draw_board(img, fen, bx, by, S)
+    cx = W // 2
+    f1 = _font("segoeuib", int(W*0.075))
+    f2 = _font("segoeuib", int(W*0.05))
+    f3 = _font("segoeui",  int(W*0.045))
+    f4 = _font("segoeui",  int(W*0.038))
+    y = by - int(f1.size*2.6) - int(f2.size*1.8)
+    _text(img, f"Puzzle #{puzzle_num}", f1, cx, y, GOLD)
+    y += int(f1.size*1.45)
+    if rating:
+        _text(img, f"Rating: {rating}", f4, cx, y, GREY); y += int(f4.size*1.7)
+    _text(img, turn_text(fen), f2, cx, y, (236, 234, 217))
+    _text(img, "Comment the answer!", f3, cx, by + 8*S + int(f3.size*1.2), GREEN)
+    return img
+
+# ------------------------------------------------------------------ thumbnail
+def render_thumbnail(fen, puzzle_num, rating=None, W=1280, H=720):
+    """Attractive chess thumbnail: board left, big bold text right, gold accents."""
+    img = Image.new("RGB", (W, H), BG)
+    d = ImageDraw.Draw(img)
+    S = H // 8
+    _draw_board(img, fen, 0, 0, S, with_coords=False)
+    # subtle golden glow strip between board and text
+    for i in range(30):
+        d.rectangle([8*S+i*2, 0, 8*S+i*2+2, H], fill=(int(40+i*4), int(34+i*2), int(18+i)))
+    tx = (W + 8*S) // 2
+    f1 = _font("segoeuib", int(H*0.13))
+    f2 = _font("segoeuib", int(H*0.075))
+    f3 = _font("segoeuib", int(H*0.062))
+    _text(img, f"PUZZLE #{puzzle_num}", f1, tx, int(H*0.16), GOLD)
+    _text(img, "CAN YOU", f2, tx, int(H*0.40), (236, 234, 217))
+    _text(img, "SOLVE IT?", f2, tx, int(H*0.52), (236, 234, 217))
+    _text(img, (f"RATING {rating}" if rating else "DAILY PUZZLE"), f3, tx, int(H*0.72), GREEN)
+    return img
+
+# Backwards-compatible alias (old callers)
+def render_board(fen, **kw):
+    return render_16x9(fen, kw.get("puzzle_num", 1))

@@ -19,7 +19,7 @@ def get_uploaded_puzzle_ids(yt, max_pages=4):
             pl = yt.playlistItems().list(part="snippet", playlistId=up,
                                          maxResults=50, pageToken=page).execute()
             for it in pl.get("items", []):
-                desc = it["snippet"]["description"]
+                desc = it["snippet"]["description"] or ""
                 for line in desc.splitlines():
                     if line.startswith("Puzzles:"):
                         ids.update(x.strip() for x in line.split(":", 1)[1].split(",") if x.strip())
@@ -28,31 +28,35 @@ def get_uploaded_puzzle_ids(yt, max_pages=4):
     except Exception:
         pass
     return ids
-CLIENT_SECRETS = os.path.join(HERE, "client_secrets.json")
-TOKEN = os.path.join(HERE, "token.pickle")
 
-def count_uploads_today():
-    """How many videos+shorts did WE upload today (Tehran time)? Survives state wipe
-    by asking YouTube directly — this is the reliable daily-quota check on CI."""
-    import datetime as dt
+def count_today_uploads(yt, max_pages=6):
+    """How many MAIN videos (desc contains 'Puzzles:') were published today (UTC).
+    Used by --cron on stateless GitHub runners so the daily ramp quota is honored
+    without needing to persist state between runs."""
+    import datetime as _dt
+    today = _dt.datetime.now(_dt.timezone.utc).date().isoformat()
+    count = 0
     try:
-        yt = get_service()
         ch = yt.channels().list(part="contentDetails", mine=True).execute()
         up = ch["items"][0]["contentDetails"]["relatedPlaylists"]["uploads"]
-        tz = dt.timezone(dt.timedelta(hours=3, minutes=30))
-        today = dt.datetime.now(tz).date().isoformat()
-        page, n = None, 0
-        for _ in range(5):
-            pl = yt.playlistItems().list(part="contentDetails", playlistId=up,
+        page = None
+        for _ in range(max_pages):
+            pl = yt.playlistItems().list(part="snippet", playlistId=up,
                                          maxResults=50, pageToken=page).execute()
             for it in pl.get("items", []):
-                pub = it.get("contentDetails", {}).get("videoPublishedAt", "")
-                if pub[:10] == today: n += 1
+                pub = (it["snippet"].get("publishedAt") or "")[:10]
+                if pub != today:
+                    return count   # playlist is newest-first; past today => stop
+                desc = it["snippet"]["description"] or ""
+                if "Puzzles:" in desc:
+                    count += 1
             page = pl.get("nextPageToken")
             if not page: break
-        return n
     except Exception:
-        return 0
+        pass
+    return count
+CLIENT_SECRETS = os.path.join(HERE, "client_secrets.json")
+TOKEN = os.path.join(HERE, "token.pickle")
 
 def get_service():
     from google.auth.transport.requests import Request
@@ -98,6 +102,17 @@ def upload(video_path, title, description, tags, is_short=False):
     vid = resp["id"]
     print(f"    UPLOADED: https://youtu.be/{vid}", flush=True)
     return vid
+
+def set_thumbnail(video_id, image_path):
+    """Upload a custom thumbnail for a video (channel must be verified once)."""
+    yt = get_service()
+    try:
+        yt.thumbnails().set(videoId=video_id, media_body=image_path).execute()
+        print("    Thumbnail set ✅", flush=True)
+        return True
+    except Exception as e:
+        print(f"    Thumbnail skipped ({e})", flush=True)
+        return False
 
 if __name__ == "__main__":
     if len(sys.argv) < 2:
