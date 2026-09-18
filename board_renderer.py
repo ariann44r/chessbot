@@ -118,23 +118,35 @@ def render_9x16(fen, puzzle_num, W=1080, H=1920, rating=None):
     return img
 
 # ------------------------------------------------------------------ thumbnail
-def render_thumbnail(fen, puzzle_num, rating=None, W=1280, H=720):
-    """Attractive chess thumbnail: board left, big bold text right, gold accents."""
-    img = Image.new("RGB", (W, H), BG)
+THUMB_STYLES = [
+    # (hook lines, accent color, gradient background) — هر بار متفاوت
+    (["99% FAIL",   "THIS PUZZLE!"], (255, 209, 66),  [(18, 18, 24), (46, 26, 10)]),
+    (["IMPOSSIBLE?", "TRY IT!"],     (255, 84, 84),   [(26, 10, 10), (10, 18, 26)]),
+    (["ONLY 1%",    "CAN SOLVE!"],   (66, 255, 170),  [(8, 22, 16), (16, 30, 40)]),
+    (["CAN YOU",    "SURVIVE?"],     (120, 180, 255), [(10, 10, 28), (24, 10, 40)]),
+    (["BEWARE:",    "ONLY 1 MOVE!"],  (255, 140, 60),  [(30, 16, 6), (40, 30, 10)]),
+    (["GENIUS",     "TEST ♟"],       (212, 175, 55),  [(14, 14, 18), (44, 34, 12)]),
+]
+
+def render_thumbnail(fen, puzzle_num, rating=None, W=1280, H=720, variant=0):
+    """Attractive, always-different chess thumbnail (style varies per upload)."""
+    hook, accent, grad = THUMB_STYLES[variant % len(THUMB_STYLES)]
+    img = Image.new("RGB", (W, H), grad[0])
     d = ImageDraw.Draw(img)
+    for y in range(H):                     # full-color gradient background
+        t = y / H
+        d.line([(0, y), (W, y)],
+               fill=tuple(int(grad[0][i]*(1-t)+grad[1][i]*t) for i in range(3)))
     S = H // 8
+    d.rectangle([-6, -6, 8*S+6, H+6], fill=tuple(max(0, c-8) for c in grad[0]))
     _draw_board(img, fen, 0, 0, S, with_coords=False)
-    # subtle golden glow strip between board and text
-    for i in range(30):
-        d.rectangle([8*S+i*2, 0, 8*S+i*2+2, H], fill=(int(40+i*4), int(34+i*2), int(18+i)))
+    d.rectangle([0, 0, 8*S-1, H-1], outline=accent, width=6)
     tx = (W + 8*S) // 2
-    f1 = _font("segoeuib", int(H*0.13))
-    f2 = _font("segoeuib", int(H*0.075))
-    f3 = _font("segoeuib", int(H*0.062))
-    _text(img, f"PUZZLE #{puzzle_num}", f1, tx, int(H*0.16), GOLD)
-    _text(img, "CAN YOU", f2, tx, int(H*0.40), (236, 234, 217))
-    _text(img, "SOLVE IT?", f2, tx, int(H*0.52), (236, 234, 217))
-    _text(img, (f"RATING {rating}" if rating else "DAILY PUZZLE"), f3, tx, int(H*0.72), GREEN)
+    _text(img, f"PUZZLE #{puzzle_num}", _font("segoeuib", int(H*0.115)), tx, int(H*0.13), accent)
+    _text(img, hook[0], _font("segoeuib", int(H*0.085)), tx, int(H*0.38), (245, 243, 235))
+    _text(img, hook[1], _font("segoeuib", int(H*0.085)), tx, int(H*0.52), (245, 243, 235))
+    _text(img, (f"RATING {rating}" if rating else "DAILY PUZZLE"), _font("segoeuib", int(H*0.058)), tx, int(H*0.70), accent)
+    _text(img, "ANSWER PINNED 💬", _font("segoeuib", int(H*0.045)), tx, int(H*0.82), (160, 160, 150))
     return img
 
 # Backwards-compatible alias (old callers)

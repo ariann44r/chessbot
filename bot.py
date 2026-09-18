@@ -139,17 +139,39 @@ HASHTAG_SETS = [
     ["#chess", "#puzzleoftheday", "#chesslover", "#tactics", "#blitz"],
 ]
 
+BENEFIT_LINES = [
+    "Solving chess puzzles daily sharpens your pattern recognition, so you instantly spot forks, pins, skewers and discovered attacks in your real games.",
+    "Regular tactics training builds deep calculation skills — you learn to visualize moves several plies ahead without touching a piece.",
+    "Every puzzle you solve becomes a mental template your brain reuses in tournaments and casual games alike, saving precious clock time.",
+    "Puzzle training is the single fastest way to raise your rating: tactics decide the majority of games at club and intermediate levels.",
+    "Working through positions with a clear best move teaches discipline — you stop guessing and start evaluating candidate moves properly.",
+    "Solving mixed-theme puzzles improves your opening and middlegame intuition, because you recognize typical piece arrangements instantly.",
+    "Puzzles train your endgame technique too: many positions teach you how to convert a tiny advantage into a full point.",
+    "Daily practice builds focus and patience — the same concentration muscle that helps at school, work and exams.",
+    "Trying to solve a position before seeing the answer creates stronger memory traces than passive watching; that's how improvement actually happens.",
+    "Comparing your solution with the model move reveals gaps in your thinking and shows exactly what to train next.",
+    "Puzzles are a zero-risk gym: you can experiment with sacrifices and wild ideas here that you'd never dare try in rated games.",
+    "Consistency beats intensity — just five puzzles a day compounds into thousands of patterns per year, a real competitive edge.",
+    "Training with time pressure (2 minutes per position here) mimics real blitz and rapid conditions, improving your clock management.",
+    "Finally, puzzles are simply fun: every solved position releases a small hit of achievement that keeps your love for chess alive.",
+]
+
 def gen_copy(puzzles, n0, n1):
     """The bot generates title, description, caption and hashtags itself."""
     rng = random.Random(f"copy{n0}")
     r0, r1 = puzzles[0]["rating"], puzzles[-1]["rating"]
     title = rng.choice(TITLES).format(r0=r0, r1=r1, n0=n0, n1=n1)
     themes = sorted({t for pz in puzzles for t in pz.get("themes", "").split(" ") if t})[:4]
+    # دیسکریپشن ~۴۰۰ کلمه‌ای، هر بار با ترتیب و متن متفاوت
+    benefits = rng.sample(BENEFIT_LINES, 12)
+    rng.shuffle(benefits)
     desc = (rng.choice(DESC_OPENERS)
             + f"\n\nPuzzles #{n0}-#{n1} | Ratings {r0}-{r1}"
             + (f"\nThemes: {', '.join(themes)}" if themes else "")
             + "\n\n⏱ 2 minutes per puzzle — pause and think!"
-            + "\n💬 Comment the answer for every puzzle you solve!"
+            + "\n\n🏆 WHY SOLVE CHESS PUZZLES EVERY DAY?"
+            + "\n" + "\n".join("• " + b for b in benefits)
+            + "\n\n💬 Comment the answer for every puzzle you solve!"
             + "\n🔔 Subscribe & Follow for daily chess puzzles ♟️"
             + f"\n\nPuzzles: {','.join(p['id'] for p in puzzles)}")
     return title, desc, rng.choice(CAPTIONS), rng.choice(HASHTAG_SETS)

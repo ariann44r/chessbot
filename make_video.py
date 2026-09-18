@@ -175,9 +175,11 @@ def make_short(pz, puzzle_num, out_dir, tag, i, ff=None, seg=25):
 def make_thumbnail(puzzles, out_dir, tag, puzzle_num):
     """Attractive chess thumbnail for the main video."""
     os.makedirs(out_dir, exist_ok=True)
-    pz = random.Random(tag).choice(puzzles)   # a random puzzle of this batch as cover
+    rng = random.Random(f"{tag}thumb")
+    pz = rng.choice(puzzles)                 # a random puzzle of this batch as cover
     path = os.path.join(out_dir, f"{tag}_thumb.png")
-    br.render_thumbnail(pz["fen"], puzzle_num, rating=pz.get("rating")).save(path)
+    # هر بار استایل/رنگ/متن تامنیل متفاوت
+    br.render_thumbnail(pz["fen"], puzzle_num, rating=pz.get("rating"), variant=rng.randrange(6)).save(path)
     return path
 
 if __name__ == "__main__":
