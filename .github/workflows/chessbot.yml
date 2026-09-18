@@ -50,5 +50,17 @@ jobs:
             python download_puzzles.py
           fi
 
-      - name: Build + upload 1 video (+5 shorts linked to it)
-        run: python bot.py --once
+      - name: Build + upload next batch (slot-aware, quota-aware)
+        run: python bot.py --cron
+
+      - name: Persist anti-duplicate memory + numbering state
+        run: |
+          git config user.name  "chessbot-bot"
+          git config user.email "bot@users.noreply.github.com"
+          git add used_puzzles.json state.json 2>/dev/null || true
+          if ! git diff --cached --quiet; then
+            git commit -m "chore: persist used-puzzle memory + numbering [skip ci]"
+            git push
+          else
+            echo "nothing new to persist"
+          fi
