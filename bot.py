@@ -21,10 +21,20 @@ PUZZLES_F = os.path.join(HERE, "puzzles.jsonl")
 
 PUZZLES_PER_VIDEO = CFG.get("puzzles_per_video", 5)
 SECONDS_PER_PUZZLE = CFG.get("seconds_per_puzzle", 120)   # 2 minutes
-SHORTS_PER_VIDEO = CFG.get("shorts_per_video", 2)
 SHORT_SECONDS = CFG.get("short_seconds", 25)
 LAUNCH_DATE = dt.date.fromisoformat(CFG.get("launch_date", dt.date.today().isoformat()))
-WEEKLY_QUOTA = CFG.get("weekly_videos_per_day", {"1": 2, "2": 3, "3": 5, "4": 8, "default": 8})
+WEEKLY_QUOTA = CFG.get("weekly_videos_per_day", {"1": 2, "2": 5, "3": 8, "default": 8})
+SHORTS_RAMP = CFG.get("shorts_per_video_ramp", {"1": 2, "2": 2, "3": 1, "default": 1})
+
+import glob
+POOL_FILES = sorted(glob.glob(os.path.join(HERE, "puzzles*.jsonl")))   # 100k base + big chunks
+
+def current_week():
+    return max(1, (dt.date.today() - LAUNCH_DATE).days // 7 + 1)
+
+def shorts_per_video():
+    """Shorts ramp: 2 shorts/video in weeks 1-2, 1 short/video from week 3 on."""
+    return int(SHORTS_RAMP.get(str(current_week()), SHORTS_RAMP.get("default", 1)))
 
 def videos_per_day():
     """Ramping schedule (permanent):
@@ -75,16 +85,19 @@ def sync_with_youtube():
         log("YouTube history sync skipped:", e)
 
 def next_puzzles(state, n=PUZZLES_PER_VIDEO):
-    """Pick the next UNUSED puzzles (skips any already uploaded)."""
+    """Pick the next UNUSED puzzles across the WHOLE pool
+    (puzzles.jsonl + puzzles_*.jsonl chunks). Skips any already uploaded."""
     used = load_used()
     picked = 0
-    with open(PUZZLES_F, encoding="utf-8") as f:
-        for line in f:
-            if picked >= n: break
-            pz = json.loads(line)
-            if pz["id"] in used: continue
-            picked += 1
-            yield pz
+    for path in POOL_FILES:
+        if picked >= n: break
+        with open(path, encoding="utf-8") as f:
+            for line in f:
+                if picked >= n: break
+                pz = json.loads(line)
+                if pz["id"] in used: continue
+                picked += 1
+                yield pz
 
 def schedule_times(n=None):
     """N upload slots evenly spread between first_upload_time and last_upload_time.
@@ -170,9 +183,10 @@ def run_one_batch(batch_no):
     link = f"https://youtu.be/{vid}"
     log("Upload DONE ✅ setting thumbnail...")
     log(f"Video link: {link}")
-    log(f"Now making {SHORTS_PER_VIDEO} Shorts (from the same puzzles, linked to the video)...")
+    spv = shorts_per_video()
+    log(f"Now making {spv} Shorts (from the same puzzles, linked to the video)...")
     rng = random.Random(tag)
-    shorts_pz = rng.sample(puzzles, SHORTS_PER_VIDEO)
+    shorts_pz = rng.sample(puzzles, spv)
     for i, pz in enumerate(shorts_pz, 1):
         pnum = n0 + puzzles.index(pz)
         s = mv.make_short(pz, pnum, os.path.join(HERE, "out"), tag, i, ff=ff, seg=SHORT_SECONDS)
@@ -186,14 +200,14 @@ def run_one_batch(batch_no):
                   ["chess", "chessshorts", "puzzle", "chesspuzzle", "shorts", "chesstactics"],
                   is_short=True)
         os.remove(s)
-        log(f"  Short {i}/{SHORTS_PER_VIDEO} uploaded & linked to the video.")
+        log(f"  Short {i}/{spv} uploaded & linked to the video.")
     os.remove(video); os.remove(thumb)
     state["next"] += len(puzzles)
     state["uploaded_today"] += 1
     save_state(state)
     used = load_used() | {p["id"] for p in puzzles}
     save_used(used)   # local anti-duplicate memory
-    log("BATCH DONE ✅ (1 video + %d linked Shorts)." % SHORTS_PER_VIDEO)
+    log(f"BATCH DONE ✅ (1 video + {spv} linked Shorts).")
     try:
         import ctypes
         ctypes.windll.user32.MessageBoxW(
@@ -251,7 +265,7 @@ def main():
             log("YouTube count unavailable, falling back to state:", e)
         if done >= quota:
             log(f"Daily quota reached ({done}/{quota}). Nothing to do."); return
-        log(f"Once mode: uploading batch {done + 1}/{quota} (1 video + {SHORTS_PER_VIDEO} Shorts) ...")
+        log(f"Once mode: uploading batch {done + 1}/{quota} (1 video + {shorts_per_video()} Shorts) ...")
         try:
             run_one_batch(done + 1)
         except Exception as e:
