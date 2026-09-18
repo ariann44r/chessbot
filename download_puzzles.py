@@ -32,17 +32,24 @@ def decisive(themes):
     """Mate or a clear advantage/win only — the puzzle must matter (win or dominate)."""
     return any(t in themes for t in DECISIVE_THEMES)
 
-def validate(fen, moves_str):
-    """Check the FEN + solution moves are legal AND end in a real result
-    (checkmate for mate puzzles, legal finish otherwise) using python-chess."""
+def validate(fen, moves_str, themes=""):
+    """STRICT solution check with python-chess. A puzzle is kept ONLY if:
+       1. it HAS a solution (non-empty moves),
+       2. every move of the line is legal from the position,
+       3. mate-themed puzzles REALLY end in checkmate.
+    Source is the OFFICIAL Lichess puzzle database only — nothing else."""
     try:
         import chess
+        moves = moves_str.split()
+        if not moves: return False            # no solution -> reject
         board = chess.Board(fen)
-        for mv in moves_str.split():
+        for mv in moves:                       # every move must be legal
             m = chess.Move.from_uci(mv)
             if m not in board.legal_moves: return False
             board.push(m)
-        return board.is_checkmate() or board.is_game_over() or True  # legal line is enough
+        if "mate" in themes:                   # mate puzzles must end in checkmate
+            return board.is_checkmate()
+        return True                            # legal, complete solution line
     except Exception:
         return False
 
@@ -67,8 +74,9 @@ def main():
             if not decisive(row[idx["Themes"]]):   # mate / winning advantage only
                 continue
             pid, fen, moves = row[idx["PuzzleId"]], row[idx["FEN"]], row[idx["Moves"]]
+            themes = row[idx["Themes"]]
             if pid in seen: continue
-            if not validate(fen, moves): continue
+            if not validate(fen, moves, themes): continue
             seen.add(pid)
             out.write(json.dumps({"id": pid, "fen": fen, "moves": moves.split(),
                                   "rating": rating,
