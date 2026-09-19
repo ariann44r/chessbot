@@ -16,6 +16,9 @@ on:
     - cron: "30 19 * * *"
   workflow_dispatch: {}   # دکمه‌ی Run manually
 
+permissions:
+  contents: write
+
 jobs:
   upload:
     runs-on: ubuntu-latest
