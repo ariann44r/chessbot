@@ -1,8 +1,3 @@
-{"id": "00008", "fen": "r6k/pp2r2p/4Rp1Q/3p4/8/1N1P2b1/PqP3PP/7K w - - 0 25", "moves": ["e6e7", "b2b1", "b3c1", "b1c1", "h6c1"], "stm": "w", "rating": 1797, "themes": "crushing hangingPiece long middlegame"}
-{"id": "0000D", "fen": "5rk1/1p3ppp/pq1Q1b2/8/8/1P3N2/P4PPP/3R2K1 b - - 3 27", "moves": ["f8d8", "d6d8", "f6d8"], "stm": "b", "rating": 1468, "themes": "advantage endgame short"}
-{"id": "000Pw", "fen": "6k1/5p1p/4p3/4q3/3n4/2Q3P1/PP1N1P1P/6K1 b - - 3 37", "moves": ["d4e2", "g1f1", "e2c3"], "stm": "b", "rating": 1547, "themes": "crushing endgame fork short"}
-{"id": "000Sa", "fen": "2Q2bk1/5p1p/p5p1/2p3P1/4B3/7P/qPr2P2/2K4R w - - 0 33", "moves": ["e4c2", "a2a1", "c2b1"], "stm": "w", "rating": 1655, "themes": "advantage endgame short"}
-{"id": "000hf", "fen": "r1bq3r/pp1nbkp1/2p1p2p/8/2BP4/1PN3P1/P3QP1P/3R1RK1 w - - 0 20", "moves": ["e2e6", "f7f8", "e6f7"], "stm": "w", "rating": 1473, "themes": "mate mateIn2 middlegame short"}
 {"id": "000qP", "fen": "8/7R/8/5p2/4bk1P/8/2r5/5KR1 b - - 8 51", "moves": ["f4f3", "f1e1", "c2c1", "e1d2", "c1g1"], "stm": "b", "rating": 2172, "themes": "crushing endgame exposedKing long skewer"}
 {"id": "00143", "fen": "r4rk1/5ppp/1np2q2/p1b5/2p1B3/P7/1P3PPP/R1BQ1RK1 w - - 2 18", "moves": ["d1h5", "h7h6", "h5c5"], "stm": "w", "rating": 1800, "themes": "advantage middlegame short"}
 {"id": "0017R", "fen": "r2qk2r/pp2ppbp/1n1p2p1/3P4/2n5/2NBBP1P/PP3P2/R2QK2R w KQkq - 0 13", "moves": ["d3c4", "b6c4", "d1a4", "d8d7", "a4c4"], "stm": "w", "rating": 1495, "themes": "advantage fork long middlegame"}
