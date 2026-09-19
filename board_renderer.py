@@ -42,14 +42,13 @@ def piece_img(p, S):
     im = Image.open(os.path.join(PIECE_DIR, ("w" if p.isupper() else "b") + p.upper() + ".png")).convert("RGBA")
     return im.resize((S, S), Image.LANCZOS)
 
-def turn_text(fen):
-    """The SOLVER's turn — the side that plays the winning solution.
-    Lichess DB format: the FEN side-to-move plays moves[0], which is the
-    opponent's (losing) setup move. The puzzle is solved by the OTHER side.
-    So the solver is always the OPPOSITE of the FEN side to move.
-    (Example: FEN '... b' + Kxf7 ... means WHITE mates in 2 -> 'White to move'.)"""
-    solver = "w" if fen.split()[1] == "b" else "b"
-    return "White to move" if solver == "w" else "Black to move"
+def turn_text(fen, stm=None):
+    """Side to move = the SOLVER, verified at pool-build time with python-chess.
+    The pool now stores the position AFTER the opponent's setup move, so the
+    FEN side-to-move IS the solver — no guessing, no flipping.
+    stm ('w'/'b') is used when present as a double check."""
+    side = stm or fen.split()[1]
+    return "White to move" if side == "w" else "Black to move"
 
 def _draw_board(img, fen, bx, by, S, with_coords=True):
     d = ImageDraw.Draw(img)

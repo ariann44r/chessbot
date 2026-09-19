@@ -70,6 +70,26 @@ def load_used():
 def save_used(used):
     json.dump(sorted(used), open(USED_F, "w", encoding="utf-8"))
 
+def prune_pools(used):
+    """PHYSICALLY delete every used puzzle from every pool file so a used
+    puzzle cannot come back even if used_puzzles.json is ever lost.
+    The pruned pool is committed back by the workflow."""
+    removed = 0
+    for path in POOL_FILES:
+        if not os.path.exists(path): continue
+        keep_lines = []
+        with open(path, encoding="utf-8") as f:
+            for line in f:
+                try:
+                    if json.loads(line)["id"] in used:
+                        removed += 1; continue
+                except Exception:
+                    continue
+                keep_lines.append(line)
+        with open(path, "w", encoding="utf-8") as f:
+            f.writelines(keep_lines)
+    if removed: log(f"Physically removed {removed} used puzzles from pool files.")
+
 def sync_with_youtube():
     """Mark puzzles already uploaded (read from YouTube history) as used.
     This is the memory that survives VPS wipes."""
@@ -232,6 +252,7 @@ def run_one_batch(batch_no):
     save_state(state)
     used = load_used() | {p["id"] for p in puzzles}
     save_used(used)   # local anti-duplicate memory
+    prune_pools(used)  # + physical deletion from the pool files (permanent)
     log(f"BATCH DONE ✅ (1 video + {spv} linked Shorts).")
     try:
         import ctypes

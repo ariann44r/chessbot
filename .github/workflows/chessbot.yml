@@ -41,13 +41,10 @@ jobs:
           echo "${{ secrets.TOKEN_PICKLE_B64 }}" | base64 -d > token.pickle
           echo "${{ secrets.CLIENT_SECRETS_B64 }}" | base64 -d > client_secrets.json
 
-      - name: Restore puzzle pool (cache ~2M puzzles, downloaded once)
-        uses: actions/cache@v4
-        with:
-          path: puzzles.jsonl
-          key: puzzles-pool-2m-v1
-
-      - name: Download puzzle pool if not cached
+      # The 100k validated pool now lives IN THE REPO (puzzles.jsonl).
+      # The bot physically prunes it every run and the prune is committed below,
+      # so a used puzzle can never come back (no stale cache).
+      - name: Rebuild pool only if missing
         run: |
           if [ ! -s puzzles.jsonl ]; then
             python download_puzzles.py
@@ -60,7 +57,7 @@ jobs:
         run: |
           git config user.name  "chessbot-bot"
           git config user.email "bot@users.noreply.github.com"
-          git add used_puzzles.json state.json 2>/dev/null || true
+          git add used_puzzles.json state.json puzzles.jsonl 2>/dev/null || true
           if ! git diff --cached --quiet; then
             git commit -m "chore: persist used-puzzle memory + numbering [skip ci]"
             git push
