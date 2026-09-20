@@ -1,8 +1,3 @@
-{"id": "001aK", "fen": "6k1/5p2/4p3/P1B5/2P4P/4Pnp1/Rb2r3/5K2 w - - 0 34", "moves": ["f1e2", "g3g2", "e3e4", "f3d4", "e2f2"], "stm": "w", "rating": 2055, "themes": "crushing endgame hangingPiece long quietMove"}
-{"id": "001kG", "fen": "rnbq3r/1p3kpp/p4n2/2b5/2pNP3/2N5/PPP3PP/R1BQ1RK1 w - - 2 12", "moves": ["d1h5", "f7g8", "h5c5"], "stm": "w", "rating": 1983, "themes": "advantage opening pin short"}
-{"id": "001uD", "fen": "6k1/1p4p1/1p3p1p/2r1p3/2n5/r3PN2/2RnNPPP/2R3K1 w - - 0 33", "moves": ["f3d2", "c4d2", "c2d2", "c5c1", "e2c1"], "stm": "w", "rating": 1894, "themes": "advantage long middlegame"}
-{"id": "001xO", "fen": "k1r1b3/p1r1nppp/Bp1qpn2/2Np4/1P1P4/PQR1PN2/5PPP/2R3K1 b - - 1 19", "moves": ["b6c5", "a6c8", "c5c4"], "stm": "b", "rating": 1798, "themes": "crushing master masterVsMaster middlegame sacrifice short"}
-{"id": "002Ds", "fen": "8/2p5/pp1p4/P2Pk2p/1PP1p2P/2n1K2P/3N4/8 w - - 0 46", "moves": ["b4b5", "c3d1", "e3e2", "a6b5", "a5a6"], "stm": "w", "rating": 1992, "themes": "crushing endgame knightEndgame long"}
 {"id": "002KJ", "fen": "r3k2r/ppq1bppp/4pn2/2Ppn3/1P4bP/2P2N2/P3BPP1/RNBQ1RK1 w kq - 3 11", "moves": ["f3e5", "c7e5", "e2g4"], "stm": "w", "rating": 1619, "themes": "crushing discoveredAttack middlegame short"}
 {"id": "002LF", "fen": "7r/p4pk1/1pp3p1/8/6q1/4Q3/PP1R1P1r/5KN1 w - - 0 39", "moves": ["e3e5", "f7f6", "e5c7", "g7h6", "c7h2"], "stm": "w", "rating": 2184, "themes": "advantage endgame interference long"}
 {"id": "002Ua", "fen": "r4rk1/pp3ppp/3p1q2/P1P1p3/2B5/2B2n2/2P2P1P/R2Q1R1K b - - 1 16", "moves": ["f6f4", "d1f3", "f4f3"], "stm": "b", "rating": 1629, "themes": "crushing kingsideAttack middlegame short"}
