@@ -1,8 +1,3 @@
-{"id": "0068D", "fen": "7r/pppk4/2pN1r2/8/3P2p1/2P5/PP2RPP1/4R1K1 b - - 0 26", "moves": ["f6h6", "f2f4", "g4g3", "e2e7", "d7d6", "g1f1", "h6h1"], "stm": "b", "rating": 1949, "themes": "crushing endgame veryLong"}
-{"id": "006E1", "fen": "5rk1/R4pp1/1p5p/3Q4/1PPp2q1/3P2P1/5P2/4K3 b - - 0 34", "moves": ["f8e8", "e1f1", "g4h3", "d5g2", "e8e1", "f1e1", "h3g2"], "stm": "b", "rating": 1537, "themes": "crushing deflection endgame veryLong"}
-{"id": "006XF", "fen": "r5kr/pp1qb1p1/2p4p/3pP2Q/3Pb3/2P1B3/PP4PP/R4RK1 w - - 2 18", "moves": ["h5f7", "g8h7", "f1f6", "e7f6", "f7d7"], "stm": "w", "rating": 2372, "themes": "advantage long middlegame pin"}
-{"id": "006fF", "fen": "r1b4r/pp1k2p1/2nb2qp/1B1p2B1/3p3Q/8/PPP2PPP/3RR1K1 w - - 0 18", "moves": ["h4g4", "d7c7", "g5d8", "h8d8", "g4g6"], "stm": "w", "rating": 1731, "themes": "advantage discoveredAttack exposedKing long middlegame"}
-{"id": "006om", "fen": "1r3k2/5p1p/2p1pp2/P2n4/r3N3/P4PK1/2R2P1P/2R5 w - - 10 30", "moves": ["e4c5", "a4a5", "c5d7", "f8g7", "d7b8"], "stm": "w", "rating": 1841, "themes": "crushing endgame fork long master"}
 {"id": "006pe", "fen": "r4r2/2q1Nb2/5Qpk/2n4p/pp5P/8/1PP2PP1/2KR3R w - - 0 29", "moves": ["e7f5", "h6h7", "f6g7"], "stm": "w", "rating": 1600, "themes": "master mate mateIn2 middlegame pin short"}
 {"id": "007en", "fen": "rn3rk1/4pp1p/3p2pB/2q4P/3QP1b1/Pp6/1P2B3/1K1R2NR b - - 0 20", "moves": ["c5c2", "b1a1", "a8a3", "b2a3", "c2a2"], "stm": "b", "rating": 1733, "themes": "long mate mateIn3 middlegame queensideAttack sacrifice"}
 {"id": "008EC", "fen": "6k1/4rRp1/p6p/7P/q1pP4/2Pb2Q1/P4RP1/6K1 b - - 0 31", "moves": ["e7f7", "g3b8", "g8h7", "f2f7", "a4d1", "g1f2", "d1f1", "f2g3", "f1f7"], "stm": "b", "rating": 2416, "themes": "advantage endgame skewer veryLong"}
