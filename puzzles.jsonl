@@ -1,8 +1,3 @@
-{"id": "006pe", "fen": "r4r2/2q1Nb2/5Qpk/2n4p/pp5P/8/1PP2PP1/2KR3R w - - 0 29", "moves": ["e7f5", "h6h7", "f6g7"], "stm": "w", "rating": 1600, "themes": "master mate mateIn2 middlegame pin short"}
-{"id": "007en", "fen": "rn3rk1/4pp1p/3p2pB/2q4P/3QP1b1/Pp6/1P2B3/1K1R2NR b - - 0 20", "moves": ["c5c2", "b1a1", "a8a3", "b2a3", "c2a2"], "stm": "b", "rating": 1733, "themes": "long mate mateIn3 middlegame queensideAttack sacrifice"}
-{"id": "008EC", "fen": "6k1/4rRp1/p6p/7P/q1pP4/2Pb2Q1/P4RP1/6K1 b - - 0 31", "moves": ["e7f7", "g3b8", "g8h7", "f2f7", "a4d1", "g1f2", "d1f1", "f2g3", "f1f7"], "stm": "b", "rating": 2416, "themes": "advantage endgame skewer veryLong"}
-{"id": "008LT", "fen": "r4r1k/6p1/b3p1nN/p1pp4/1p3P1q/3P1Q1B/PPP2PK1/R6R w - - 1 27", "moves": ["h6f7", "f8f7", "h3e6"], "stm": "w", "rating": 2205, "themes": "crushing kingsideAttack middlegame pin sacrifice short"}
-{"id": "008Sk", "fen": "8/6pp/3Bp2k/p2pP2P/P3p1PK/8/r4b2/5R2 w - - 3 38", "moves": ["f1f2", "g7g5", "h4g3", "a2f2", "g3f2"], "stm": "w", "rating": 2163, "themes": "crushing endgame long"}
 {"id": "008lc", "fen": "7k/pb1qn1rn/1p2R2Q/2p2p2/2Pp4/3B4/PP3P1P/4RK2 w - - 2 28", "moves": ["h6g7", "h8g7", "e6e7", "d7e7", "e1e7"], "stm": "w", "rating": 1973, "themes": "attraction crushing exposedKing fork long middlegame"}
 {"id": "008nF", "fen": "2rq1rk1/7p/1n4pb/1R2Q3/pPpP1P2/P1B5/3N2PP/2R3K1 b - - 0 31", "moves": ["f8e8", "e5e8", "d8e8"], "stm": "b", "rating": 2179, "themes": "crushing master middlegame short trappedPiece"}
 {"id": "008qL", "fen": "r7/6pk/p2Q4/2p1p1qp/1pP1PrP1/1P3P1P/1P4K1/R4R2 b - - 0 25", "moves": ["a8d8", "d6d8", "g5d8"], "stm": "b", "rating": 1921, "themes": "advantage endgame short"}
