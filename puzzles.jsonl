@@ -1,8 +1,3 @@
-{"id": "00C3O", "fen": "r2qkbnr/pp4pp/2p2p2/4n2b/2B1P3/2N2N2/PPP1Q1PP/R1B2RK1 b kq - 1 10", "moves": ["h5f3", "g2f3", "d8d4"], "stm": "b", "rating": 2037, "themes": "crushing kingsideAttack opening short"}
-{"id": "00CMj", "fen": "7R/8/8/6p1/2p1p1k1/2Pb3p/P4K2/8 b - - 5 71", "moves": ["e4e3", "f2e3", "g4g3"], "stm": "b", "rating": 1736, "themes": "crushing defensiveMove endgame master short"}
-{"id": "00CXr", "fen": "r2k2nr/p3qBb1/1p1p3p/Q5p1/3n1B2/2N2R2/PPP3P1/R5K1 w - - 0 19", "moves": ["a5d5", "d4f3", "g2f3", "a8c8", "f4d6"], "stm": "w", "rating": 1905, "themes": "advantage long middlegame sacrifice"}
-{"id": "00CbV", "fen": "2r3k1/5p2/p3p1nQ/3pPP2/2qN4/6BP/7K/4b3 w - - 0 34", "moves": ["f5f6", "e1g3", "h2g3", "c4d3", "d4f3", "d3f3", "g3f3", "g6h4", "h6h4"], "stm": "w", "rating": 2416, "themes": "crushing middlegame veryLong"}
-{"id": "00Cqg", "fen": "3r2k1/pp4bp/4qpp1/3Pp3/8/4Q2P/4B1P1/2rR3K w - - 0 27", "moves": ["d5e6", "d8d1", "e2d1", "c1d1", "h1h2"], "stm": "w", "rating": 1618, "themes": "advantage defensiveMove hangingPiece long middlegame"}
 {"id": "00D12", "fen": "8/6pp/8/3kP3/1p1P2P1/1rpK3P/4R3/8 w - - 0 40", "moves": ["e5e6", "c3c2", "d3c2", "b3c3", "c2d2"], "stm": "w", "rating": 2119, "themes": "crushing endgame long rookEndgame"}
 {"id": "00D77", "fen": "5rk1/bpp3pp/p1npb3/4p3/1P2Nr2/P1PP3q/1B1QBPR1/2K3R1 w - - 0 22", "moves": ["g2g7", "g8h8", "e4g5"], "stm": "w", "rating": 1798, "themes": "crushing kingsideAttack middlegame short"}
 {"id": "00DII", "fen": "2rr2k1/p5p1/1p5p/2pq1p1P/8/P4QR1/5PP1/4R1K1 w - - 0 32", "moves": ["e1e8", "g8f7", "f3d5", "d8d5", "e8c8"], "stm": "w", "rating": 1706, "themes": "advantage endgame intermezzo long"}
