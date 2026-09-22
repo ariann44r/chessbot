@@ -1,8 +1,3 @@
-{"id": "00AEM", "fen": "r2q1rk1/p4p1p/1p3Qp1/2p4P/3p4/5R2/PPP2PP1/4R1K1 w - - 1 23", "moves": ["e1e7", "d8e7", "f6e7"], "stm": "w", "rating": 1707, "themes": "crushing endgame short"}
-{"id": "00AFG", "fen": "r4rk1/5ppp/p3bp2/2q2N1Q/Ppp5/8/1PP2PPP/R2R2K1 w - - 0 22", "moves": ["f5h6", "g7h6", "h5c5"], "stm": "w", "rating": 1470, "themes": "advantage discoveredAttack middlegame short"}
-{"id": "00Ac7", "fen": "8/2p1pk1p/Pp4p1/8/2P2P2/p2r2P1/3PR2P/3K4 w - - 0 34", "moves": ["a6a7", "d3d8", "e2e3", "a3a2", "e3a3"], "stm": "w", "rating": 2109, "themes": "advancedPawn advantage endgame long rookEndgame"}
-{"id": "00AcQ", "fen": "8/1bpp2k1/1p5r/1P2P3/3P1P2/2P1n1K1/Q5P1/8 b - - 1 30", "moves": ["h6g6", "g3f2", "g6g2"], "stm": "b", "rating": 1741, "themes": "crushing endgame short"}
-{"id": "00Al5", "fen": "2r3k1/p2B1pbp/1p2pnp1/n2p4/3P4/1Pr1P2P/P1QB1PP1/2R2RK1 b - - 0 19", "moves": ["c3c2", "d7c8", "c2d2"], "stm": "b", "rating": 1719, "themes": "advantage middlegame short"}
 {"id": "00Ar2", "fen": "r2q1r2/1n4pk/p6p/1ppN1pb1/3n1B2/P2PN2P/1PPQ1PP1/R3R1K1 b - - 1 21", "moves": ["g5f4", "d5f4", "d8g5", "d2d1", "g5f4"], "stm": "b", "rating": 1746, "themes": "advantage clearance long middlegame"}
 {"id": "00B3B", "fen": "2KQ4/8/5b2/p1B5/P7/3k4/6p1/8 b - - 0 77", "moves": ["f6d8", "c8d8", "d3c4"], "stm": "b", "rating": 1429, "themes": "crushing endgame short"}
 {"id": "00BM8", "fen": "3r1rk1/pp2bppp/2ppnn2/8/N1P1P3/q1P4P/P2N2PB/R2Q1R1K w - - 1 17", "moves": ["d2b1", "a3a4", "d1a4"], "stm": "w", "rating": 1637, "themes": "advantage master middlegame short trappedPiece"}
