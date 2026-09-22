@@ -1,8 +1,3 @@
-{"id": "00D12", "fen": "8/6pp/8/3kP3/1p1P2P1/1rpK3P/4R3/8 w - - 0 40", "moves": ["e5e6", "c3c2", "d3c2", "b3c3", "c2d2"], "stm": "w", "rating": 2119, "themes": "crushing endgame long rookEndgame"}
-{"id": "00D77", "fen": "5rk1/bpp3pp/p1npb3/4p3/1P2Nr2/P1PP3q/1B1QBPR1/2K3R1 w - - 0 22", "moves": ["g2g7", "g8h8", "e4g5"], "stm": "w", "rating": 1798, "themes": "crushing kingsideAttack middlegame short"}
-{"id": "00DII", "fen": "2rr2k1/p5p1/1p5p/2pq1p1P/8/P4QR1/5PP1/4R1K1 w - - 0 32", "moves": ["e1e8", "g8f7", "f3d5", "d8d5", "e8c8"], "stm": "w", "rating": 1706, "themes": "advantage endgame intermezzo long"}
-{"id": "00DKr", "fen": "3r1k2/2p1R3/p2p2n1/1p6/1P1P2Q1/7P/5qPK/4R3 b - - 3 42", "moves": ["g6e7", "e1e4", "f8e8"], "stm": "b", "rating": 2096, "themes": "advantage defensiveMove endgame short"}
-{"id": "00DZe", "fen": "8/5k2/7p/p1P1bPpP/Pp2P3/1P1p1K2/5B2/8 b - - 2 47", "moves": ["g5g4", "f3e3", "e5d4", "e3d3", "d4f2"], "stm": "b", "rating": 2340, "themes": "bishopEndgame crushing deflection endgame long master skewer"}
 {"id": "00DkJ", "fen": "3r1bnr/2p2ppp/2bk4/R7/5P2/2N5/4N1PP/1R4K1 w - - 4 22", "moves": ["b1d1", "d6e7", "a5e5", "e7f6", "d1d8"], "stm": "w", "rating": 1575, "themes": "crushing deflection exposedKing long middlegame"}
 {"id": "00EgR", "fen": "N2k3r/1b1n1Bpp/p3P3/1pb5/6P1/4p3/PPP4P/1K1R3R b - - 0 20", "moves": ["b7h1", "d1d7", "d8c8", "d7c7", "c8b8"], "stm": "b", "rating": 1770, "themes": "advantage long middlegame"}
 {"id": "00F5e", "fen": "4k2r/1p1qb1p1/p3Rp2/2p4p/8/1Q4B1/PP3PpP/6K1 w k - 2 23", "moves": ["g3d6", "d7d6", "e6d6"], "stm": "w", "rating": 1617, "themes": "advantage endgame short"}
