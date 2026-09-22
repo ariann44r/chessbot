@@ -1,8 +1,3 @@
-{"id": "00GiQ", "fen": "5r2/5p1k/6pp/ppqp1P2/7Q/5N2/6PP/5N1K w - - 0 32", "moves": ["f3g5", "h7g7", "f5f6", "g7f6", "g5e4"], "stm": "w", "rating": 1830, "themes": "attraction crushing discoveredCheck doubleCheck endgame long pin"}
-{"id": "00GuG", "fen": "8/7p/1KR3k1/8/5p2/5n2/8/8 b - - 1 63", "moves": ["g6f5", "b6c5", "h7h5"], "stm": "b", "rating": 2484, "themes": "advantage defensiveMove endgame master short"}
-{"id": "00H2L", "fen": "8/8/2p2p2/p4P1p/Pk5P/3K2P1/8/8 b - - 2 39", "moves": ["c6c5", "d3e2", "c5c4", "g3g4", "h5g4"], "stm": "b", "rating": 2358, "themes": "crushing endgame long pawnEndgame quietMove"}
-{"id": "00Hpe", "fen": "1rr3k1/4Qppp/q3p3/p2pn3/3N4/4P2P/5PP1/RR4K1 w - - 0 30", "moves": ["b1b8", "c8b8", "e7c7", "b8c8", "c7e5"], "stm": "w", "rating": 1768, "themes": "advantage fork long middlegame"}
-{"id": "00HqY", "fen": "8/6p1/8/8/4P2k/5KpP/8/8 w - - 4 47", "moves": ["f3g2", "h4g5", "g2g3"], "stm": "w", "rating": 1802, "themes": "crushing endgame master pawnEndgame short zugzwang"}
 {"id": "00Huv", "fen": "3r1q2/5prk/p3pQpp/1p2P3/2p4R/2P2P1P/PPB2P2/6K1 w - - 3 30", "moves": ["h4h6", "h7g8", "f6h4"], "stm": "w", "rating": 1763, "themes": "clearance crushing endgame short"}
 {"id": "00HzX", "fen": "4r1k1/5pp1/7R/1p6/8/1PP3QP/2q2PP1/6K1 b - - 0 29", "moves": ["c2c1", "g1h2", "c1h6"], "stm": "b", "rating": 1565, "themes": "crushing endgame fork short"}
 {"id": "00IHi", "fen": "8/8/1k6/8/p7/1p1N2P1/5KP1/r3R3 b - - 1 55", "moves": ["a1e1", "f2e1", "a4a3", "e1d2", "a3a2", "d2c3", "a2a1q"], "stm": "b", "rating": 1662, "themes": "advancedPawn crushing endgame promotion veryLong"}
