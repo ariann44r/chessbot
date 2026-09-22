@@ -1,8 +1,3 @@
-{"id": "00Ar2", "fen": "r2q1r2/1n4pk/p6p/1ppN1pb1/3n1B2/P2PN2P/1PPQ1PP1/R3R1K1 b - - 1 21", "moves": ["g5f4", "d5f4", "d8g5", "d2d1", "g5f4"], "stm": "b", "rating": 1746, "themes": "advantage clearance long middlegame"}
-{"id": "00B3B", "fen": "2KQ4/8/5b2/p1B5/P7/3k4/6p1/8 b - - 0 77", "moves": ["f6d8", "c8d8", "d3c4"], "stm": "b", "rating": 1429, "themes": "crushing endgame short"}
-{"id": "00BM8", "fen": "3r1rk1/pp2bppp/2ppnn2/8/N1P1P3/q1P4P/P2N2PB/R2Q1R1K w - - 1 17", "moves": ["d2b1", "a3a4", "d1a4"], "stm": "w", "rating": 1637, "themes": "advantage master middlegame short trappedPiece"}
-{"id": "00BZ6", "fen": "1r1r1bk1/3n1p1p/1qp3p1/2N1p3/PpQ1P3/4BP2/4N1PP/1RR3K1 b - - 1 24", "moves": ["f8c5", "e3c5", "d7c5"], "stm": "b", "rating": 2366, "themes": "advantage master middlegame short"}
-{"id": "00Bg0", "fen": "8/3k4/3P1K2/p4R2/5r2/5P2/8/8 b - - 2 57", "moves": ["f4f5", "f6f5", "a5a4", "f5e4", "a4a3", "e4d3", "a3a2"], "stm": "b", "rating": 1643, "themes": "advancedPawn crushing endgame quietMove rookEndgame veryLong"}
 {"id": "00C3O", "fen": "r2qkbnr/pp4pp/2p2p2/4n2b/2B1P3/2N2N2/PPP1Q1PP/R1B2RK1 b kq - 1 10", "moves": ["h5f3", "g2f3", "d8d4"], "stm": "b", "rating": 2037, "themes": "crushing kingsideAttack opening short"}
 {"id": "00CMj", "fen": "7R/8/8/6p1/2p1p1k1/2Pb3p/P4K2/8 b - - 5 71", "moves": ["e4e3", "f2e3", "g4g3"], "stm": "b", "rating": 1736, "themes": "crushing defensiveMove endgame master short"}
 {"id": "00CXr", "fen": "r2k2nr/p3qBb1/1p1p3p/Q5p1/3n1B2/2N2R2/PPP3P1/R5K1 w - - 0 19", "moves": ["a5d5", "d4f3", "g2f3", "a8c8", "f4d6"], "stm": "w", "rating": 1905, "themes": "advantage long middlegame sacrifice"}
