@@ -1,8 +1,3 @@
-{"id": "00FND", "fen": "8/1P6/8/7p/3P4/3k1p1P/4p3/4K3 b - - 1 49", "moves": ["d3e3", "h3h4", "f3f2"], "stm": "b", "rating": 1728, "themes": "advancedPawn endgame mate mateIn2 pawnEndgame short"}
-{"id": "00FPo", "fen": "7R/1K3p2/6k1/PP6/6p1/6rp/8/8 w - - 0 48", "moves": ["a5a6", "h3h2", "h8h2"], "stm": "w", "rating": 1842, "themes": "crushing endgame rookEndgame short"}
-{"id": "00Feu", "fen": "4Rrk1/p6p/1pp2rp1/8/5B1q/4QP1P/P1P2PK1/8 w - - 3 29", "moves": ["f4g5", "h4g5", "e3g5"], "stm": "w", "rating": 2010, "themes": "crushing endgame fork short"}
-{"id": "00GVf", "fen": "5k2/3b2q1/pn4p1/1rp2p2/8/8/1P2Q1P1/1K2R2R w - - 4 33", "moves": ["h1h8", "g7h8", "e2e7", "f8g8", "e7d8"], "stm": "w", "rating": 1529, "themes": "crushing exposedKing long middlegame sacrifice"}
-{"id": "00GWg", "fen": "1r1r2k1/pN4pp/2n1b3/2R2p2/2P1p3/8/P4PPP/3BR1K1 b - - 0 26", "moves": ["b8b7", "c5c6", "b7b1", "g1f1", "d8d1", "e1d1", "b1d1", "f1e2", "e6d7"], "stm": "b", "rating": 2091, "themes": "crushing middlegame veryLong"}
 {"id": "00GiQ", "fen": "5r2/5p1k/6pp/ppqp1P2/7Q/5N2/6PP/5N1K w - - 0 32", "moves": ["f3g5", "h7g7", "f5f6", "g7f6", "g5e4"], "stm": "w", "rating": 1830, "themes": "attraction crushing discoveredCheck doubleCheck endgame long pin"}
 {"id": "00GuG", "fen": "8/7p/1KR3k1/8/5p2/5n2/8/8 b - - 1 63", "moves": ["g6f5", "b6c5", "h7h5"], "stm": "b", "rating": 2484, "themes": "advantage defensiveMove endgame master short"}
 {"id": "00H2L", "fen": "8/8/2p2p2/p4P1p/Pk5P/3K2P1/8/8 b - - 2 39", "moves": ["c6c5", "d3e2", "c5c4", "g3g4", "h5g4"], "stm": "b", "rating": 2358, "themes": "crushing endgame long pawnEndgame quietMove"}
