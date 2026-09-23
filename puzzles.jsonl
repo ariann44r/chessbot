@@ -1,8 +1,3 @@
-{"id": "00Kbj", "fen": "8/8/6p1/PR3p2/1P3k1P/8/r5P1/7K b - - 0 39", "moves": ["f4g3", "b5d5", "a2a1", "d5d1", "a1d1"], "stm": "b", "rating": 1479, "themes": "endgame long mate mateIn3 rookEndgame"}
-{"id": "00Kia", "fen": "5r1k/4n2p/1p4p1/pP5Q/P2pB2K/6P1/2P4P/4q3 w - - 0 38", "moves": ["h5e5", "h8g8", "e4d5", "e7d5", "e5e1"], "stm": "w", "rating": 1637, "themes": "advantage discoveredAttack endgame fork long"}
-{"id": "00LH7", "fen": "6k1/6Bp/3q2pP/5p2/p2PnQ2/2r5/P5PK/4R3 w - - 2 40", "moves": ["e1e4", "d6f4", "e4f4"], "stm": "w", "rating": 1526, "themes": "crushing endgame short"}
-{"id": "00LNH", "fen": "1k2r3/pp2r2p/2pqbpp1/3n4/3P1p2/1B3N1P/PPQB1PP1/1K1RR3 b - - 3 22", "moves": ["e6f5", "c2f5", "g6f5"], "stm": "b", "rating": 1466, "themes": "advantage middlegame pin short"}
-{"id": "00LOy", "fen": "5k2/1p3pp1/p3p3/r3b3/2P2B2/1P6/1PR1K1PP/8 w - - 1 34", "moves": ["b3b4", "a5a1", "f4e5"], "stm": "w", "rating": 1476, "themes": "crushing endgame short"}
 {"id": "00LRq", "fen": "1k6/1p1q2r1/P2p3p/1NpPpn1Q/5b2/2P5/1P2B1P1/R6K w - - 4 29", "moves": ["a6a7", "b8a8", "b5c7", "d7c7", "h5e8", "c7b8", "a7b8q"], "stm": "w", "rating": 2163, "themes": "advancedPawn discoveredCheck doubleCheck mate mateIn4 middlegame promotion queensideAttack sacrifice veryLong"}
 {"id": "00LSv", "fen": "3r3k/1p4pp/2p3q1/8/3Q4/8/PP5P/R4RrK w - - 2 29", "moves": ["d4g1", "g6e4", "g1g2"], "stm": "w", "rating": 1695, "themes": "advantage endgame short"}
 {"id": "00LUV", "fen": "5r1k/8/p3p2p/1p2P3/1P1p2R1/3Q3P/3r1qPK/8 w - - 2 32", "moves": ["d3g6", "f2g2", "g4g2", "d2g2", "g6g2"], "stm": "w", "rating": 1491, "themes": "crushing endgame long"}
