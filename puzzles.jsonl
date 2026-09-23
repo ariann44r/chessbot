@@ -1,8 +1,3 @@
-{"id": "00JtR", "fen": "1rbk3r/3qp1b1/p3P1Bp/1N4p1/8/P5P1/1P2Q1P1/R3K2R b KQ - 0 23", "moves": ["d7b5", "e2d2", "d8c7", "a1c1", "c7b7", "g6e4", "b7a7"], "stm": "b", "rating": 2149, "themes": "crushing defensiveMove middlegame veryLong"}
-{"id": "00K7b", "fen": "7k/1p4p1/pP1r4/4qp2/P2Nn3/1Q5P/2N5/3R1K2 b - - 5 48", "moves": ["e5f4", "b3f3", "f4f3", "d4f3", "d6d1"], "stm": "b", "rating": 1871, "themes": "advantage exposedKing long middlegame"}
-{"id": "00KHR", "fen": "8/6pk/1Q1p2n1/4p3/2P3P1/P2PPK1P/1B6/4q3 b - - 2 35", "moves": ["g6h4", "f3e4", "e1h1"], "stm": "b", "rating": 1426, "themes": "endgame mate mateIn2 short"}
-{"id": "00KNK", "fen": "r3r1k1/p1p4p/3b4/6qN/4p3/1P1b1Q2/P2P1PP1/B5KR w - - 0 23", "moves": ["h5f6", "g8f8", "f6h7", "f8e7", "a1f6", "g5f6", "f3f6"], "stm": "w", "rating": 2002, "themes": "advantage deflection discoveredCheck doubleCheck fork middlegame veryLong"}
-{"id": "00KSB", "fen": "7r/4kpRp/2p2p1P/p1P1n3/Pp6/1B6/5PP1/6K1 w - - 3 36", "moves": ["f2f4", "e5d7", "g7f7"], "stm": "w", "rating": 1478, "themes": "crushing endgame short"}
 {"id": "00Kbj", "fen": "8/8/6p1/PR3p2/1P3k1P/8/r5P1/7K b - - 0 39", "moves": ["f4g3", "b5d5", "a2a1", "d5d1", "a1d1"], "stm": "b", "rating": 1479, "themes": "endgame long mate mateIn3 rookEndgame"}
 {"id": "00Kia", "fen": "5r1k/4n2p/1p4p1/pP5Q/P2pB2K/6P1/2P4P/4q3 w - - 0 38", "moves": ["h5e5", "h8g8", "e4d5", "e7d5", "e5e1"], "stm": "w", "rating": 1637, "themes": "advantage discoveredAttack endgame fork long"}
 {"id": "00LH7", "fen": "6k1/6Bp/3q2pP/5p2/p2PnQ2/2r5/P5PK/4R3 w - - 2 40", "moves": ["e1e4", "d6f4", "e4f4"], "stm": "w", "rating": 1526, "themes": "crushing endgame short"}
