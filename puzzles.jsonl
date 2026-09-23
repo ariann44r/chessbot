@@ -1,8 +1,3 @@
-{"id": "00J1t", "fen": "r1qr3k/pp3pb1/1np1p3/8/3P3P/2N2PR1/PP1Q2P1/2KR4 w - - 0 23", "moves": ["d2g5", "d8g8", "g5h5", "g7h6", "h5h6"], "stm": "w", "rating": 1642, "themes": "exposedKing kingsideAttack long mate mateIn3 middlegame"}
-{"id": "00JMV", "fen": "8/1p4pk/pPp4b/P1P1P3/3pq1b1/8/6PP/2B1QRK1 b - - 1 32", "moves": ["e4e1", "f1e1", "h6c1"], "stm": "b", "rating": 2189, "themes": "advantage endgame short"}
-{"id": "00JYV", "fen": "r2q1rk1/p1p1bppp/2pp2b1/4p3/4n1PN/2NP3P/PPP2PK1/R1BQ1R2 w - - 0 12", "moves": ["h4g6", "e4c3", "g6e7", "d8e7", "b2c3"], "stm": "w", "rating": 1650, "themes": "advantage kingsideAttack long opening"}
-{"id": "00JZk", "fen": "7k/5q1p/3Q2p1/8/P3p3/1p2B2P/1br3P1/R5K1 w - - 1 33", "moves": ["a1f1", "f7f1", "g1f1"], "stm": "w", "rating": 2027, "themes": "crushing endgame short"}
-{"id": "00JqT", "fen": "2r2rk1/pp2R3/5p2/3p1q2/3P2P1/4QP1p/PP3R1P/6K1 b - - 0 30", "moves": ["f5b1", "f2f1", "b1b2", "e3e6", "g8h8"], "stm": "b", "rating": 1897, "themes": "crushing deflection endgame long"}
 {"id": "00JtR", "fen": "1rbk3r/3qp1b1/p3P1Bp/1N4p1/8/P5P1/1P2Q1P1/R3K2R b KQ - 0 23", "moves": ["d7b5", "e2d2", "d8c7", "a1c1", "c7b7", "g6e4", "b7a7"], "stm": "b", "rating": 2149, "themes": "crushing defensiveMove middlegame veryLong"}
 {"id": "00K7b", "fen": "7k/1p4p1/pP1r4/4qp2/P2Nn3/1Q5P/2N5/3R1K2 b - - 5 48", "moves": ["e5f4", "b3f3", "f4f3", "d4f3", "d6d1"], "stm": "b", "rating": 1871, "themes": "advantage exposedKing long middlegame"}
 {"id": "00KHR", "fen": "8/6pk/1Q1p2n1/4p3/2P3P1/P2PPK1P/1B6/4q3 b - - 2 35", "moves": ["g6h4", "f3e4", "e1h1"], "stm": "b", "rating": 1426, "themes": "endgame mate mateIn2 short"}
