@@ -1,8 +1,3 @@
-{"id": "00IUW", "fen": "8/2p1r1kp/5pp1/3P3r/4P3/2N1QbPq/PPP2R1P/5RK1 b - - 4 23", "moves": ["h3g3", "h2g3", "h5h1"], "stm": "b", "rating": 1783, "themes": "clearance kingsideAttack mate mateIn2 middlegame operaMate sacrifice short"}
-{"id": "00IYg", "fen": "r1b2r2/pp2n1p1/1qn1ppk1/3pP1N1/3P3P/P7/1P1Q1PP1/RN2K2R w KQ - 0 14", "moves": ["h4h5", "g6h6", "g5e6", "h6h7", "e6f8"], "stm": "w", "rating": 1784, "themes": "advantage discoveredAttack discoveredCheck long middlegame"}
-{"id": "00IiM", "fen": "r5k1/pp4p1/1n6/3pB3/3P2pb/2N2Q2/PP6/2K3R1 b - - 0 24", "moves": ["g4f3", "g1g7", "g8f8"], "stm": "b", "rating": 1719, "themes": "advantage middlegame short"}
-{"id": "00InW", "fen": "8/2p5/pp1p4/3P1N2/PPP1Pp2/5n1p/5K1k/8 w - - 0 47", "moves": ["f2f3", "h2g1", "f3f4", "h3h2", "f5g3"], "stm": "w", "rating": 1450, "themes": "crushing defensiveMove endgame hangingPiece knightEndgame long"}
-{"id": "00Ivf", "fen": "8/2p4r/1p3k2/p2PR1p1/P1P2pP1/1P3P1r/4R1K1/8 b - - 0 46", "moves": ["h3h2", "g2f1", "h2h1", "f1f2", "h7h2"], "stm": "b", "rating": 1604, "themes": "endgame long mate mateIn3 rookEndgame"}
 {"id": "00J1t", "fen": "r1qr3k/pp3pb1/1np1p3/8/3P3P/2N2PR1/PP1Q2P1/2KR4 w - - 0 23", "moves": ["d2g5", "d8g8", "g5h5", "g7h6", "h5h6"], "stm": "w", "rating": 1642, "themes": "exposedKing kingsideAttack long mate mateIn3 middlegame"}
 {"id": "00JMV", "fen": "8/1p4pk/pPp4b/P1P1P3/3pq1b1/8/6PP/2B1QRK1 b - - 1 32", "moves": ["e4e1", "f1e1", "h6c1"], "stm": "b", "rating": 2189, "themes": "advantage endgame short"}
 {"id": "00JYV", "fen": "r2q1rk1/p1p1bppp/2pp2b1/4p3/4n1PN/2NP3P/PPP2PK1/R1BQ1R2 w - - 0 12", "moves": ["h4g6", "e4c3", "g6e7", "d8e7", "b2c3"], "stm": "w", "rating": 1650, "themes": "advantage kingsideAttack long opening"}
