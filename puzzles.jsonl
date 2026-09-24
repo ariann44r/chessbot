@@ -1,8 +1,3 @@
-{"id": "00MZr", "fen": "1k5r/ppp5/2p5/3n4/5pQ1/3P1P1r/PPP2K2/6R1 b - - 3 26", "moves": ["h3h2", "g1g2", "d5e3"], "stm": "b", "rating": 2007, "themes": "crushing endgame short"}
-{"id": "00Mca", "fen": "1k6/1Pp2qp1/p1R1r3/6pp/Q6P/1P6/P4PBK/3r4 w - - 6 35", "moves": ["a4c4", "e6c6", "c4f7"], "stm": "w", "rating": 2349, "themes": "crushing endgame short"}
-{"id": "00Msq", "fen": "r4k2/1pp2Bp1/5n1p/1q2N3/3P4/7P/5PP1/4Q1K1 w - - 3 31", "moves": ["f7c4", "b5c4", "e5c4"], "stm": "w", "rating": 1820, "themes": "crushing endgame master short"}
-{"id": "00MwU", "fen": "3r1b1R/1pq3p1/p1k3P1/3p4/1P1Q4/4PP2/P1P5/2K5 w - - 0 27", "moves": ["h8f8", "d8f8", "d4c5", "c6d7", "c5f8"], "stm": "w", "rating": 1709, "themes": "advantage attraction endgame fork long sacrifice"}
-{"id": "00NEO", "fen": "4qr2/pR4pk/2b2p1p/4pPP1/3bB3/3P3Q/P1r4P/4BR1K w - - 1 25", "moves": ["h3h6", "h7g8", "h6g7"], "stm": "w", "rating": 1874, "themes": "mate mateIn2 middlegame pin short"}
 {"id": "00NHK", "fen": "r1b2rk1/1p2b1p1/pq2p1P1/3pn3/1P1P4/P1N1P3/6P1/R2QK2R w KQ - 0 18", "moves": ["h1h8", "g8h8", "d1h5", "h8g8", "h5h7"], "stm": "w", "rating": 1796, "themes": "attraction fork long mate mateIn3 middlegame sacrifice"}
 {"id": "00NKk", "fen": "2r2r1k/pp4q1/4Q3/3p4/3P4/P1P5/1P3PPP/4R1K1 w - - 1 26", "moves": ["e1e3", "c8c7", "e3h3"], "stm": "w", "rating": 1852, "themes": "advantage endgame quietMove short"}
 {"id": "00Nay", "fen": "r2q1r2/ppp2p2/3p1nk1/4p1p1/2B1P3/2NP2Q1/PPP5/2K4R w - - 1 20", "moves": ["g3h3", "f8h8", "h3f5", "g6g7", "f5g5"], "stm": "w", "rating": 1809, "themes": "crushing deflection long middlegame quietMove"}
