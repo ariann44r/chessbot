@@ -1,8 +1,3 @@
-{"id": "00Tll", "fen": "5r1k/1pN3p1/7p/pP6/P3P3/2PP3P/3BnbPK/R7 b - - 0 27", "moves": ["f2g3", "h2h1", "g3c7"], "stm": "b", "rating": 1544, "themes": "advantage endgame fork short"}
-{"id": "00TuA", "fen": "8/6p1/8/pp2k1p1/2p2p2/2P2PPP/PP3K2/8 b - - 1 37", "moves": ["f4g3", "f2g3", "e5f5"], "stm": "b", "rating": 2173, "themes": "crushing defensiveMove endgame pawnEndgame short"}
-{"id": "00Ty2", "fen": "r5k1/ppp4p/2P3r1/8/4P3/B1P5/P1Q1K3/6N1 b - - 0 31", "moves": ["g6g2", "e2d3", "a8d8", "d3c4", "g2c2"], "stm": "b", "rating": 2047, "themes": "advantage endgame exposedKing fork long"}
-{"id": "00U2C", "fen": "8/8/1R5P/2p5/p1k1pP2/4P3/np1K4/8 b - - 1 48", "moves": ["a2b4", "b6b4", "c4b4", "d2c2", "b4a3", "h6h7", "a3a2"], "stm": "b", "rating": 2235, "themes": "crushing defensiveMove endgame master quietMove veryLong"}
-{"id": "00UF4", "fen": "rnbQ3r/pp2n1bp/2p2k2/1q2p1p1/3P4/5N2/P1P2PPP/R1B1K2R w KQ - 1 14", "moves": ["c1g5", "f6f7", "d8e7"], "stm": "w", "rating": 1639, "themes": "crushing middlegame short"}
 {"id": "00UHs", "fen": "r4rk1/ppp3pp/4p3/2P4P/1nNPb1q1/P3QP2/1P3K2/R4B1R w - - 1 23", "moves": ["c4e5", "b4d5", "e5g4", "d5e3", "f2e3"], "stm": "w", "rating": 2219, "themes": "crushing long middlegame"}
 {"id": "00UI2", "fen": "2r3nr/p5pp/b3k3/3p1p2/4p3/BP3P2/P1PN2PP/2KR3R w - - 0 19", "moves": ["f3e4", "f5e4", "d2e4", "d5e4", "d1d6", "e6f7", "d6a6"], "stm": "w", "rating": 1993, "themes": "clearance crushing fork middlegame sacrifice veryLong"}
 {"id": "00UJF", "fen": "2kr2r1/3q1p2/pp1B1n1p/2pP4/2Pp4/PQ1P3P/4B1PK/R4R2 b - - 0 21", "moves": ["d7d6", "h2g1", "g8g2", "g1g2", "d8g8", "e2g4", "f6g4"], "stm": "b", "rating": 1950, "themes": "attraction crushing middlegame veryLong"}
