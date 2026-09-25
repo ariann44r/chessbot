@@ -1,8 +1,3 @@
-{"id": "00VlM", "fen": "1k6/1p2rp1p/1p4b1/1N1B4/2P2R2/3p3P/P2Rr3/2K5 b - - 0 34", "moves": ["e2e1", "c1b2", "e7e2", "b2c3", "e1c1", "c3d4", "e2d2"], "stm": "b", "rating": 2458, "themes": "advantage clearance deflection exposedKing middlegame veryLong"}
-{"id": "00WTN", "fen": "8/7R/3k4/2pnp3/P1B5/3KP3/1r6/8 b - - 2 43", "moves": ["e5e4", "d3e4", "d5f6"], "stm": "b", "rating": 1994, "themes": "attraction crushing endgame master short"}
-{"id": "00Wi9", "fen": "8/8/3n1P2/2k1K3/2pp4/P7/8/3B4 b - - 3 63", "moves": ["d4d3", "f6f7", "d6f7"], "stm": "b", "rating": 1715, "themes": "crushing endgame master short"}
-{"id": "00WlQ", "fen": "2r1r1k1/pp3pp1/4bb1p/2qN4/Q7/1P1RPN2/P4PPP/3R2K1 b - - 0 19", "moves": ["e6d5", "a4e8", "c8e8"], "stm": "b", "rating": 1638, "themes": "crushing middlegame short"}
-{"id": "00WoW", "fen": "8/4kppR/r1p1p2p/p3P2P/4P1P1/1pP2P2/3K2B1/8 b - - 1 29", "moves": ["a5a4", "g2f1", "a4a3", "f1a6", "a3a2"], "stm": "b", "rating": 2158, "themes": "advancedPawn advantage endgame long master quietMove sacrifice"}
 {"id": "00WqT", "fen": "r4r2/1ppb1p2/p2p2p1/5P1k/4P3/2PBB1R1/PKP2P1q/8 w - - 5 27", "moves": ["d3e2", "h5h4", "e3g5"], "stm": "w", "rating": 1618, "themes": "mate mateIn2 middlegame short"}
 {"id": "00WtH", "fen": "8/2R2pk1/4p1pp/3p4/3Pq2P/1r2P1P1/5P1K/2Q5 b - - 3 45", "moves": ["b3b1", "c1b1", "e4b1"], "stm": "b", "rating": 1402, "themes": "crushing endgame short"}
 {"id": "00Wyh", "fen": "2r5/8/8/pNp1r2p/4NppP/1P1k4/2R2K2/8 w - - 0 43", "moves": ["c2d2", "d3e4", "b5d6"], "stm": "w", "rating": 1708, "themes": "endgame mate mateIn2 sacrifice short"}
