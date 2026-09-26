@@ -1,8 +1,3 @@
-{"id": "00aG8", "fen": "1r3k2/p4ppp/2r5/5N2/P2P4/8/2P2PPP/3Q2K1 b - - 4 23", "moves": ["c6b6", "g1f1", "b6b1", "d1b1", "b8b1"], "stm": "b", "rating": 1606, "themes": "advantage endgame long pin quietMove"}
-{"id": "00aa9", "fen": "6k1/7p/6p1/5p2/5PP1/7P/1K6/8 b - - 0 42", "moves": ["f5g4", "h3g4", "h7h5", "g4h5", "g6h5"], "stm": "b", "rating": 1923, "themes": "crushing endgame long pawnEndgame"}
-{"id": "00afi", "fen": "3r2k1/1p5p/pbbqp3/3PR3/P5p1/2B2r1P/1PQ2P1P/3R3K w - - 0 27", "moves": ["e5g5", "g8f8", "c2h7", "d6h2", "h1h2", "f3h3", "h7h3"], "stm": "w", "rating": 2001, "themes": "crushing deflection middlegame veryLong"}
-{"id": "00agR", "fen": "8/5pp1/p4n1p/1p2k3/8/1PK1P2P/P1B2P2/8 b - - 0 31", "moves": ["f6e4", "c2e4", "e5e4"], "stm": "b", "rating": 1820, "themes": "crushing endgame short"}
-{"id": "00axT", "fen": "3R4/8/8/5p2/8/3p3P/1k3rP1/3K4 w - - 0 49", "moves": ["d8d3", "f2g2", "d3d2", "g2d2", "d1d2"], "stm": "w", "rating": 1717, "themes": "crushing endgame long master rookEndgame"}
 {"id": "00b7t", "fen": "r2qr1k1/pb3pp1/1p4n1/3p4/1P2B2p/P1P1N1P1/2Q1PP1P/3R1RK1 b - - 0 20", "moves": ["e8e4", "c2e4", "d5e4", "d1d8", "a8d8"], "stm": "b", "rating": 1544, "themes": "advantage long middlegame"}
 {"id": "00bFH", "fen": "4r1k1/1q3ppp/3B1n2/p2P4/8/PQ5P/5PPN/1R4K1 b - - 0 27", "moves": ["e8e1", "b1e1", "b7b3"], "stm": "b", "rating": 1875, "themes": "deflection equality middlegame short"}
 {"id": "00bPT", "fen": "5Q2/pp1kpp2/3p1n2/2pP4/2P1P3/2q2PK1/8/5B2 w - - 2 34", "moves": ["f1h3", "d7c7", "f8e7"], "stm": "w", "rating": 1878, "themes": "advantage deflection endgame short"}
