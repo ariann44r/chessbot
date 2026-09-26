@@ -1,8 +1,3 @@
-{"id": "00b7t", "fen": "r2qr1k1/pb3pp1/1p4n1/3p4/1P2B2p/P1P1N1P1/2Q1PP1P/3R1RK1 b - - 0 20", "moves": ["e8e4", "c2e4", "d5e4", "d1d8", "a8d8"], "stm": "b", "rating": 1544, "themes": "advantage long middlegame"}
-{"id": "00bFH", "fen": "4r1k1/1q3ppp/3B1n2/p2P4/8/PQ5P/5PPN/1R4K1 b - - 0 27", "moves": ["e8e1", "b1e1", "b7b3"], "stm": "b", "rating": 1875, "themes": "deflection equality middlegame short"}
-{"id": "00bPT", "fen": "5Q2/pp1kpp2/3p1n2/2pP4/2P1P3/2q2PK1/8/5B2 w - - 2 34", "moves": ["f1h3", "d7c7", "f8e7"], "stm": "w", "rating": 1878, "themes": "advantage deflection endgame short"}
-{"id": "00baa", "fen": "1r1qr1k1/p1p2ppp/1p1b1n2/3N4/3Q4/1P4P1/PBP1PPKP/R3R3 b - - 2 15", "moves": ["d6e5", "d5f6", "d8f6", "d4c4", "e5b2"], "stm": "b", "rating": 1960, "themes": "advantage long middlegame skewer"}
-{"id": "00bhw", "fen": "8/2pR3p/1p1b3k/p2B2pP/P1Pr2P1/5P2/4r3/5R1K w - - 1 32", "moves": ["d5e4", "d4e4", "f3e4"], "stm": "w", "rating": 2255, "themes": "crushing endgame short"}
 {"id": "00bqJ", "fen": "r7/1pp4k/p2p3p/3Ppq2/2P2bb1/1N2R3/PPQ5/1K1N2R1 b - - 9 27", "moves": ["f5c2", "b1c2", "g4d1", "g1d1", "f4e3"], "stm": "b", "rating": 1903, "themes": "advantage attraction long middlegame queensideAttack"}
 {"id": "00ccX", "fen": "r4rk1/1p1b1pbp/p1pp2p1/8/2PNq3/1P1QP2P/PB3PP1/R2R2K1 b - - 1 19", "moves": ["e4d3", "d1d3", "c6c5", "b2c3", "c5d4"], "stm": "b", "rating": 1639, "themes": "crushing long middlegame"}
 {"id": "00coU", "fen": "6k1/R3K3/8/1r6/5r2/p4N2/8/5R2 b - - 4 50", "moves": ["f4f7", "e7d6", "f7a7"], "stm": "b", "rating": 1472, "themes": "crushing endgame short skewer"}
