@@ -1,8 +1,3 @@
-{"id": "00YhY", "fen": "8/8/5kp1/R7/4p1PP/5p2/2r2P2/6K1 b - - 0 52", "moves": ["c2c1", "g1h2", "e4e3"], "stm": "b", "rating": 1687, "themes": "crushing endgame rookEndgame short"}
-{"id": "00YjD", "fen": "8/8/2p5/5k2/2R3p1/1P1P2K1/2r5/8 b - - 1 38", "moves": ["c2c4", "d3c4", "c6c5", "b3b4", "c5b4"], "stm": "b", "rating": 1944, "themes": "crushing endgame long quietMove rookEndgame"}
-{"id": "00Yuf", "fen": "5rk1/n1q2ppp/1p1bpn2/3p1b2/NP1P4/P3PN2/3BBPPP/3Q1RK1 b - - 1 19", "moves": ["f5c2", "d1a1", "c2a4"], "stm": "b", "rating": 1993, "themes": "advantage interference middlegame short"}
-{"id": "00ZDZ", "fen": "8/pp4k1/2p3p1/3nRr2/3P1PK1/2P5/PP6/5R2 b - - 0 36", "moves": ["f5e5", "d4e5", "d5e3", "g4f3", "e3f1"], "stm": "b", "rating": 1665, "themes": "advantage endgame fork long"}
-{"id": "00ZEW", "fen": "r1b5/pppqNkp1/3p3p/4r2n/1PP2p1N/P5P1/4Q2P/4RRK1 w - - 4 23", "moves": ["e2h5", "e5h5", "f1f4", "f7e8", "e7g6"], "stm": "w", "rating": 2205, "themes": "advantage discoveredAttack discoveredCheck long middlegame pin sacrifice"}
 {"id": "00ZEc", "fen": "1r3b2/5p1k/3P1qRP/r1n1p3/ppB5/P2Q1P2/1PP5/1K6 w - - 1 36", "moves": ["g6g7", "h7h6", "d3h7"], "stm": "w", "rating": 1803, "themes": "discoveredCheck doubleCheck mate mateIn2 middlegame short"}
 {"id": "00ZSu", "fen": "8/2R5/1r2k1pp/1P6/K4p2/4p2P/5PP1/8 w - - 0 44", "moves": ["f2e3", "f4e3", "c7c3"], "stm": "w", "rating": 2130, "themes": "advantage endgame rookEndgame short"}
 {"id": "00ZWf", "fen": "r1b2bnr/ppQp3p/2n2q1k/6pP/2B1P3/2PP4/PP3PP1/RNB1K2R b KQ - 0 11", "moves": ["f8d6", "c7d6", "f6d6"], "stm": "b", "rating": 1423, "themes": "crushing middlegame short trappedPiece"}
