@@ -1,8 +1,3 @@
-{"id": "00bqJ", "fen": "r7/1pp4k/p2p3p/3Ppq2/2P2bb1/1N2R3/PPQ5/1K1N2R1 b - - 9 27", "moves": ["f5c2", "b1c2", "g4d1", "g1d1", "f4e3"], "stm": "b", "rating": 1903, "themes": "advantage attraction long middlegame queensideAttack"}
-{"id": "00ccX", "fen": "r4rk1/1p1b1pbp/p1pp2p1/8/2PNq3/1P1QP2P/PB3PP1/R2R2K1 b - - 1 19", "moves": ["e4d3", "d1d3", "c6c5", "b2c3", "c5d4"], "stm": "b", "rating": 1639, "themes": "crushing long middlegame"}
-{"id": "00coU", "fen": "6k1/R3K3/8/1r6/5r2/p4N2/8/5R2 b - - 4 50", "moves": ["f4f7", "e7d6", "f7a7"], "stm": "b", "rating": 1472, "themes": "crushing endgame short skewer"}
-{"id": "00cxg", "fen": "r2qk2r/1p2bp2/p2pp1p1/8/4b2P/4B3/PPPQB3/2K3RR w kq - 0 18", "moves": ["d2d4", "e4h1", "d4h8", "e8d7", "h8d8"], "stm": "w", "rating": 1896, "themes": "advantage fork long middlegame"}
-{"id": "00d4c", "fen": "3r3k/p1p3p1/1p3q1p/4b3/2P1p3/1P2B1P1/P3QPKP/3R4 b - - 1 29", "moves": ["f6f3", "e2f3", "e4f3", "g2f3", "d8d1"], "stm": "b", "rating": 1614, "themes": "advantage endgame long master"}
 {"id": "00dRh", "fen": "1q5k/1b2Q1pp/pb3p2/1p6/1P2P3/PB3n2/5PKP/3RR3 b - - 1 25", "moves": ["b8h2", "g2f3", "h2f2"], "stm": "b", "rating": 1822, "themes": "crushing middlegame short"}
 {"id": "00dTd", "fen": "3r4/ppp1Q3/1b3P2/3k4/4qp2/P1Pr4/1P3P2/1K2N3 w - - 6 32", "moves": ["e7d8", "d5c6", "e1d3"], "stm": "w", "rating": 2012, "themes": "advantage endgame hangingPiece short"}
 {"id": "00dWq", "fen": "2r1kb2/5p1p/p3p3/1p2P3/1Pq2Q2/P1p3P1/2P4P/2KR1R2 b - - 1 28", "moves": ["f8h6", "c1b1", "h6f4"], "stm": "b", "rating": 2078, "themes": "advantage endgame pin short"}
